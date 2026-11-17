@@ -5,8 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SHAJU BOT</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial,sans-serif;color:#fff;text-align:center;background:linear-gradient(180deg,#2ecc71,#1e8449,#145a32);min-height:100vh}
-.live-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;background:linear-gradient(180deg,#87CEEB 0%,#a8e063 40%,#56ab2f 70%,#1e8449 100%);animation:sky 8s ease-in-out infinite alternate}
-@keyframes sky{from{filter:brightness(1)}to{filter:brightness(1.15)}}
-.sun-glow{position:fixed;top:20px;right:20px;width:90px;height:90px;background:radial-gradient(circle,#fff700 0%,#ffeb3b 40%,transparent 70%);border-radius:50%;z
+body{margin:0;font-family:Arial;color:#fff;text-align:center;background:linear-gradient(180deg,#2ecc71,#145a32);padding:15px;padding-bottom:30px}
+.profile{width:180px;height:180px;border-radius:50%;border:5px solid #fff;object-fit:cover;box-shadow:0 0 25px #ffeb3b,0 0 50px #fff;margin-top:20px;background:#fff}
+h1{font-size:38px;letter-spacing:3px;text-shadow:0 0 20px #ffeb3b;margin-top:12px}
+.subtitle{background:rgba(0,0,0,.6);padding:14px;border-radius:18px;border:1px solid #ffeb3b;line-height:1.6;margin-top:10px}
+.banner{width:95%;height:250px;border-radius:20px;border:4px solid #fff;object-fit:cover;margin-top:15px;box-shadow:0 0 30px #fff;background:#fff}
+.features{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}
+.feat{background:rgba(0,0,0,.6);padding:13px;border-radius:14px;border:1px solid #fff;font-size:14px}
+.feat b{color:#ffeb3b;display:block}
+.box{background:#000;padding:20px;border-radius:20px;margin-top:15px;border:2px solid #ffeb3b;box-shadow:0 0 25px #ffeb3b}
+input{width:90%;padding:14px;font-size:18px;border-radius:10px;border:none;text-align:center}
+button{width:95%;padding:14px;font-size:19px;font-weight:bold;background:#ffeb3b;border:none;border-radius:10px;margin-top:12px}
+#codeDisplay{font-size:32px;color:#ffeb3b;font-weight:bold;margin-top:10px;min-height:40px}
+</style>
+</head>
+<body>
+<img src="photo.jpg" class="profile">
+<h1>SHAJU BOT</h1>
+<p class="subtitle">Natural Life - Green Village<br>Live Theme - Glow - Premium</p>
+<img src="photo.jpg" class="banner">
+<div class="features">
+<div class="feat"><b>Auto Reply</b>Bot auto reply</div>
+<div class="feat"><b>Group Features</b>Welcome, anti-link</div>
+<div class="feat"><b>Menu System</b>All menu</div>
+<div class="feat"><b>Pairing Code</b>Easy login</div>
+<div class="feat"><b>Owner Info</b>Owner details</div>
+<div class="feat"><b>Live Theme</b>Village live</div>
+<div class="feat"><b>Download</b>Song, video</div>
+<div class="feat"><b>Fun</b>Game, fun</div>
+</div>
+<div class="box">
+<h2>Enter WhatsApp Number</h2><br>
+<input id="num" value="880" placeholder="88017XXXXXXXXX">
+<button onclick="getCode()">GET PAIRING CODE</button>
+<div id="codeDisplay"></div>
+<p style="font-size:13px;margin-top:8px">WhatsApp > Linked Devices > Link with phone number</p>
+</div>
+<p style="margin-top:12px;font-size:13px">SHAJU BOT - Created by Shaju Khan</p>
+<script>
+async function getCode(){
+let n=document.getElementById('num').value;
+document.getElementById('codeDisplay').innerText="WAIT...";
+try{let r=await fetch('/api/pair',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({number:n})});let d=await r.json();document.getElementById('codeDisplay').innerText=d.code;}catch(e){document.getElementById('codeDisplay').innerText="TRY AGAIN";}
+}
+</script>
+</body>
+</html>
