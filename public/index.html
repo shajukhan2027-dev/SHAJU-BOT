@@ -1,5 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SHAJU BOT</title>
+<style>
+body{background:#02150a;color:white;text-align:center;font-family:sans-serif;padding:20px}
+img{width:150px;height:150px;border-radius:50%;border:4px solid #00ff88;object-fit:cover}
+.box{background:#00000088;padding:20px;border-radius:20px;margin-top:20px}
+input{width:90%;padding:15px;font-size:18px;border-radius:10px;border:2px solid #00ff88;background:#000;color:#fff;text-align:center}
+button{width:95%;padding:15px;font-size:20px;font-weight:bold;background:linear-gradient(90deg,#00ff88,#00c3ff);border:none;border-radius:10px;margin-top:15px}
+#codeDisplay{font-size:32px;color:#00ff88;font-weight:bold;margin-top:15px;letter-spacing:3px}
+</style>
+</head>
+<body>
+<img src="https://i.ibb.co/3yQ8zKx/shaju.jpg">
+<h1 style="color:#00ff88">SHAJU BOT</h1>
+<p>● LIVE - Public WhatsApp Bot Portal</p>
+<div class="box">
+<h2>Enter Phone Number</h2>
+<input id="num" placeholder="88017XXXXXXXXX" value="880">
+<button onclick="getCode()">GET PAIRING CODE</button>
+<div id="codeDisplay"></div>
+<p>WhatsApp > Linked Devices > Link with phone number e ei code boshau!</p>
+</div>
+<script>
 async function getCode(){
-  let num = document.querySelector('input').value;
+  let num = document.getElementById('num').value;
   document.getElementById('codeDisplay').innerText = "WAIT...";
   let res = await fetch('/api/pair', {
     method: 'POST',
@@ -9,3 +35,6 @@ async function getCode(){
   let data = await res.json();
   document.getElementById('codeDisplay').innerText = data.code;
 }
+</script>
+</body>
+</html>
