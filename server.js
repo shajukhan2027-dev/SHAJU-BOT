@@ -1,62 +1,76 @@
 const express = require('express');
-const { default: makeWASocket, useMultiFileAuthState, DisconnectReason } = require('@whiskeysockets/baileys');
-const pino = require('pino');
 const path = require('path');
-const fs = require('fs');
-
 const app = express();
 app.use(express.json());
-app.use(express.static('public'));
-const PORT = process.env.PORT || 3000;
-
+app.use(express.static(path.join(__dirname, 'public')));
 let sock = null;
-let lastCode = null;
 
 async function startBot(){
+  const { default: makeWASocket, useMultiFileAuthState } = require('@whiskeysockets/baileys');
   const { state, saveCreds } = await useMultiFileAuthState('auth');
-  sock = makeWASocket({
-    logger: pino({level:'silent'}),
-    printQRInTerminal: false,
-    auth: state,
-    browser: ['SHAJU BOT','Chrome','1.0'],
-    markOnlineOnConnect: true
-  });
+  sock = makeWASocket({ auth: state, printQRInTerminal: true, logger: require('pino')({level:'silent'}) });
   sock.ev.on('creds.update', saveCreds);
-  sock.ev.on('connection.update', (u)=>{
-    console.log('STATUS:', u.connection);
-    if(u.connection==='close'){
-      console.log('Reconnecting...');
-      setTimeout(startBot, 3000);
-    }
-    if(u.connection==='open'){
-      console.log('CONNECTED SUCCESSFULLY - SHAJU BOT LIVE!');
+
+  // 1. WELCOME - 100% kaj korbo
+  sock.ev.on('group-participants.update', async (u)=>{
+    if(u.action === 'add'){
+      for(let p of u.participants){
+        await sock.sendMessage(u.id, {text: `Welcome @${p.split('@')[0]} to the group! Type *menu*`, mentions:[p]});
+      }
     }
   });
-  // Auto Reply - Shob feature
-  sock.ev.on('messages.upsert', async ({messages})=>{
-    const m = messages[0];
-    if(!m.message || m.key.fromMe) return;
-    const text = (m.message.conversation || m.message.extendedTextMessage?.text || '').toLowerCase();
-    const from = m.key.remoteJid;
-    if(text.includes('hi') || text.includes('hello') || text.includes('salam')) await sock.sendMessage(from, {text: 'Assalamualaikum! Ami SHAJU BOT 🤖 Shopnopuri thaki aisi! Help lagle *menu* lekho.'});
-    else if(text.includes('menu')) await sock.sendMessage(from, {text: '🌸 *SHAJU BOT MENU* 🌸\n\n1. hi - Salam\n2. gaan - Gaan bajbo\n3. shopno - Shopnopuri theme\n4. owner - Shaju bhai\n5. song - Amader Deshta Shopnopuri'});
-    else if(text.includes('gaan') || text.includes('song')) await sock.sendMessage(from, {text: '🎵 Amader Deshta Shopnopuri, Sathi Modher Phul Pori... 🎵\nWebsite e gaan bajer bhai!'});
-    else if(text.includes('owner')) await sock.sendMessage(from, {text: 'Amar Malik Nationalist Shaju Khan 👑 Sylhet, Dayamir er gorbo!'});
-    else if(text.includes('shopno')) await sock.sendMessage(from, {text: '✨ Shopner Porir Moto Sundor Ei Desh ✨ Amader Sylhet!'});
+
+  sock.ev.on('messages.upsert', async (m)=>{
+    const msg = m.messages[0];
+    if(!msg.message || msg.key.fromMe) return;
+    const text = (msg.message.conversation || msg.message.extendedTextMessage?.text || "").toLowerCase().trim();
+    const from = msg.key.remoteJid;
+    const isGroup = from.endsWith('@g.us');
+    const sender = msg.key.participant || msg.key.remoteJid;
+
+    // 2. ANTI-LINK - 100% kaj korbo
+    if(isGroup && (text.includes('https://') || text.includes('http://'))){
+      try{
+        await sock.sendMessage(from, {delete: msg.key});
+        await sock.sendMessage(from, {text: `Link not allowed @${sender.split('@')[0]}`, mentions:[sender]});
+      }catch(e){}
+      return;
+    }
+
+    let reply = "";
+    // 3. MENU
+    if(text === 'menu' || text === 'hi' || text === 'hello'){
+      reply = "*SHAJU BOT - TOP 1 GROUP BOT*\n\nmenu - Show menu\nalive - Bot alive?\nowner - Owner info\n.tagall - Tag all members\n\nGroup: Welcome + Anti-Link Auto ON";
+    }
+    // 4. ALIVE
+    else if(text === 'alive'){ reply = "SHAJU BOT is Alive!"; }
+    // 5. OWNER
+    else if(text === 'owner'){ reply = "Owner: Shaju Khan\nBot: SHAJU BOT"; }
+    // 6. TAGALL - 100% kaj korbo
+    else if(text === '.tagall' && isGroup){
+      try{
+        const meta = await sock.groupMetadata(from);
+        const members = meta.participants.map(p=>p.id);
+        let txt = "*TAG ALL*\n\n";
+        members.forEach(m=> txt += `@${m.split('@')[0]} `);
+        await sock.sendMessage(from, {text: txt, mentions: members});
+        return;
+      }catch(e){ reply = "Bot ke Admin banau, tarpor .tagall likho"; }
+    }
+
+    if(reply) await sock.sendMessage(from, {text: reply});
   });
+  sock.ev.on('connection.update', (u)=>{ if(u.connection==='close') setTimeout(startBot,3000); });
 }
-startBot();
+startBot().catch(e=>console.log(e));
 
 app.post('/api/pair', async (req,res)=>{
   try{
-    let {number} = req.body;
-    number = number.replace(/[^0-9]/g,'');
-    if(!sock) return res.json({code:'WAIT - SERVER STARTING...'});
+    let number = req.body.number.replace(/[^0-9]/g,'');
+    if(!sock) return res.json({code:"WAIT 10 SEC"});
     let code = await sock.requestPairingCode(number);
-    lastCode = code;
-    console.log('PAIR CODE FOR', number, code);
-    res.json({code});
-  }catch(e){ console.log(e); res.json({code:'TRY AGAIN'}); }
+    res.json({code: code});
+  }catch(e){ res.json({code:"TRY AGAIN"}); }
 });
 app.get('/', (req,res)=> res.sendFile(path.join(__dirname,'public','index.html')));
-app.listen(PORT, ()=> console.log('Server running on', PORT));
+app.listen(process.env.PORT || 3000, ()=> console.log("Running"));
