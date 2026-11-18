@@ -7,9 +7,6 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
 body{background:#ffe4ec;padding:12px}
-.top{background:#fff;padding:14px;border-radius:15px;text-align:center}
-.top b{color:#d81b60;font-size:20px}
-.top span{font-size:12px;color:#888}
 .hero{text-align:center;padding:18px 0 5px}
 .hero h1{font-size:36px;color:#e91e63}
 .hero h2{font-size:26px;color:#d81b60;font-style:italic;font-weight:400}
@@ -18,9 +15,10 @@ body{background:#ffe4ec;padding:12px}
 .card{background:#fff;border-radius:20px;padding:18px;margin-top:15px}
 .card h3{color:#d81b60;text-align:center;font-size:19px}
 .card p{font-size:12px;color:#777;text-align:center;margin-top:4px}
-.inputbox{display:flex;align-items:center;border:1px solid #f8bbd0;border-radius:12px;padding:12px;margin-top:14px}
-.inputbox input{border:none;outline:none;width:100%;font-size:14px;margin-left:8px}
-.btn{width:100%;background:#ec407a;color:#fff;border:none;padding:14px;border-radius:12px;font-size:15px;font-weight:bold;margin-top:12px}
+.inputbox{display:flex;align-items:center;border:1px solid #f8bbd0;border-radius:12px;padding:10px 12px;margin-top:14px}
+.inputbox input{border:none;outline:none;width:100%;font-size:15px;margin-left:8px}
+.wa-icon{width:26px;height:26px;flex-shrink:0}
+.btn{width:100%;background:#ec407a;color:#fff;border:none;padding:14px;border-radius:12px;font-size:15px;font-weight:bold;margin-top:12px;cursor:pointer}
 .steps{display:flex;justify-content:space-between;text-align:center;margin-top:14px}
 .steps div{width:23%;font-size:10px;color:#666}
 .num{width:22px;height:22px;background:#ec407a;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 5px}
@@ -40,46 +38,47 @@ body{background:#ffe4ec;padding:12px}
 </head>
 <body>
 
-<div class="top"><b>🌸 SHAJU BOT</b><br><span>WhatsApp Bot • Top 1 Group Bot</span></div>
-
 <div class="hero">
 <h1>👑 SHAJU BOT</h1>
 <h2>Pair Your Bot</h2>
-<p>Get your WhatsApp pair code easily from here</p>
+<p>Get Your WhatsApp Pair Code Easily From Here</p>
 </div>
 
 <img src="photo.jpg" class="profile">
 
 <div class="card">
 <h3>Get Your Pair Code</h3>
-<p>Enter your WhatsApp number with country code</p>
-<div class="inputbox">💬 <input id="num" value="880" placeholder="88017XXXXXXXX"></div>
+<p>Enter Your WhatsApp Number With Country Code</p>
+<div class="inputbox">
+<img class="wa-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+<input id="num" value="880" placeholder="88017XXXXXXXX">
+</div>
 <p style="text-align:left;font-size:11px;margin-top:5px">Example: 88017XXXXXXXX</p>
-<button class="btn" onclick="getCode()">+ Get My Pair Code</button>
+<button class="btn" onclick="getCode()">Get My Pair Code</button>
 <div class="steps">
-<div><div class="num">1</div>Enter your number</div>
+<div><div class="num">1</div>Enter Your Number</div>
 <div><div class="num">2</div>Tap Get My Pair Code</div>
 <div><div class="num">3</div>Open Linked Devices</div>
-<div><div class="num">4</div>Type the code</div>
+<div><div class="num">4</div>Type The Code</div>
 </div>
 </div>
 
-<div class="codebox"><b style="color:#d81b60;font-size:13px">♡ Pairing Code</b><div class="code" id="codeDisplay">- - - -</div><p style="font-size:11px;color:#888;margin-top:5px">Your latest code appears here</p></div>
+<div class="codebox"><b style="color:#d81b60;font-size:13px">Pairing Code</b><div class="code" id="codeDisplay">- - - -</div><p style="font-size:11px;color:#888;margin-top:5px">Your Latest Code Appears Here</p></div>
 
-<div class="status"><b>♡ Bot Status</b><span class="on">● Online</span></div>
+<div class="status"><b>Bot Status</b><span class="on">● Online</span></div>
 
-<div class="footer">Stay Connected with SHAJU BOT</div>
+<div class="footer">Stay Connected With SHAJU BOT</div>
 
 <div class="about">
-<h3>About - Kaj Korbo Eita</h3>
-<p>SHAJU BOT is a WhatsApp bot. Pair your number here, and the bot starts working on your WhatsApp. Nicher command gula 100% kaj korbo:</p>
+<h3>About - Working Commands</h3>
+<p>SHAJU BOT is a WhatsApp Bot. Pair your number here, and the bot will start working on your WhatsApp. The commands below are 100% working:</p>
 <div class="cmds">
-<div class="cmd"><b>.menu</b><br>Show all commands</div>
-<div class="cmd"><b>.ping</b><br>Check bot speed</div>
-<div class="cmd"><b>.alive</b><br>Bot status</div>
-<div class="cmd"><b>.tagall</b><br>Tag all members</div>
-<div class="cmd"><b>.owner</b><br>Owner info</div>
-<div class="cmd"><b>Auto Welcome + Anti-Link</b><br>Group e auto cholbo</div>
+<div class="cmd"><b>.menu</b><br>Show All Commands</div>
+<div class="cmd"><b>.ping</b><br>Check Bot Speed</div>
+<div class="cmd"><b>.alive</b><br>Bot Status</div>
+<div class="cmd"><b>.tagall</b><br>Tag All Members</div>
+<div class="cmd"><b>.owner</b><br>Owner Information</div>
+<div class="cmd"><b>Auto Welcome + Anti-Link</b><br>Works Automatically In Group</div>
 </div>
 </div>
 
