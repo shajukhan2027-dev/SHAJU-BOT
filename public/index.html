@@ -3,50 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SHAJU BOT</title>
+<title>SHAJU BOT - Top 1 Group Bot</title>
 <style>
-body{margin:0;font-family:Arial;color:#fff;text-align:center;background:linear-gradient(180deg,#2ecc71,#145a32);padding:15px;padding-bottom:30px}
-.profile{width:180px;height:180px;border-radius:50%;border:5px solid #fff;object-fit:cover;box-shadow:0 0 25px #ffeb3b,0 0 50px #fff;margin-top:20px;background:#fff}
-h1{font-size:38px;letter-spacing:3px;text-shadow:0 0 20px #ffeb3b;margin-top:12px}
-.subtitle{background:rgba(0,0,0,.6);padding:14px;border-radius:18px;border:1px solid #ffeb3b;line-height:1.6;margin-top:10px}
-.banner{width:95%;height:250px;border-radius:20px;border:4px solid #fff;object-fit:cover;margin-top:15px;box-shadow:0 0 30px #fff;background:#fff}
-.features{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}
-.feat{background:rgba(0,0,0,.6);padding:13px;border-radius:14px;border:1px solid #fff;font-size:14px}
-.feat b{color:#ffeb3b;display:block}
-.box{background:#000;padding:20px;border-radius:20px;margin-top:15px;border:2px solid #ffeb3b;box-shadow:0 0 25px #ffeb3b}
-input{width:90%;padding:14px;font-size:18px;border-radius:10px;border:none;text-align:center}
-button{width:95%;padding:14px;font-size:19px;font-weight:bold;background:#ffeb3b;border:none;border-radius:10px;margin-top:12px}
-#codeDisplay{font-size:32px;color:#ffeb3b;font-weight:bold;margin-top:10px;min-height:40px}
+body{margin:0;font-family:Arial;color:#2d2d2d;text-align:center;background:#e8f5e9;padding:0 15px 20px}
+.top{background:#c8e6c9;padding:15px 0 10px}
+.profile{width:160px;height:160px;border-radius:50%;border:4px solid #fff;object-fit:cover;background:#fff}
+h1{font-size:32px;margin:10px 0 5px;color:#1b5e20}
+.subtitle{font-size:15px;line-height:1.6;color:#333}
+.banner{width:95%;height:220px;border-radius:15px;border:3px solid #fff;object-fit:cover;margin-top:12px;background:#fff}
+audio{width:95%;margin-top:12px}
+.features{text-align:left;margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.feat{background:#fff;padding:12px;border-radius:12px;border:1px solid #a5d6a7;font-size:13px}
+.feat b{color:#1b5e20;display:block}
+.box{background:#1b5e20;color:#fff;padding:20px;border-radius:18px;margin-top:14px}
+input{width:90%;padding:13px;font-size:17px;border-radius:10px;border:none;text-align:center}
+button{width:95%;padding:13px;font-size:18px;font-weight:bold;background:#ffeb3b;border:none;border-radius:10px;margin-top:12px}
+#codeDisplay{font-size:30px;color:#ffeb3b;font-weight:bold;margin-top:10px;min-height:38px}
 </style>
 </head>
 <body>
+<div class="top">
 <img src="photo.jpg" class="profile">
 <h1>SHAJU BOT</h1>
-<p class="subtitle">Natural Life - Green Village<br>Live Theme - Glow - Premium</p>
-<img src="photo.jpg" class="banner">
-<div class="features">
-<div class="feat"><b>Auto Reply</b>Bot auto reply</div>
-<div class="feat"><b>Group Features</b>Welcome, anti-link</div>
-<div class="feat"><b>Menu System</b>All menu</div>
-<div class="feat"><b>Pairing Code</b>Easy login</div>
-<div class="feat"><b>Owner Info</b>Owner details</div>
-<div class="feat"><b>Live Theme</b>Village live</div>
-<div class="feat"><b>Download</b>Song, video</div>
-<div class="feat"><b>Fun</b>Game, fun</div>
+<p class="subtitle">Top 1 Group Bot<br>Simple Village Theme - Light Theme</p>
 </div>
+
+<img src="photo.jpg" class="banner">
+
+<audio controls autoplay loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+<p style="font-size:13px;color:#555">Grameen Simple Tune</p>
+
+<div class="features">
+<div class="feat"><b>Menu</b>menu likhle menu aibo</div>
+<div class="feat"><b>Alive</b>alive likhle alive aibo</div>
+<div class="feat"><b>Owner</b>owner likhle owner aibo</div>
+<div class="feat"><b>.tagall</b>sobaire tag korbo</div>
+<div class="feat"><b>Welcome</b>notun aile welcome</div>
+<div class="feat"><b>Anti-Link</b>link dile delete</div>
+</div>
+
 <div class="box">
-<h2>Enter WhatsApp Number</h2><br>
+<h2>Connect WhatsApp</h2><br>
 <input id="num" value="880" placeholder="88017XXXXXXXXX">
 <button onclick="getCode()">GET PAIRING CODE</button>
 <div id="codeDisplay"></div>
-<p style="font-size:13px;margin-top:8px">WhatsApp > Linked Devices > Link with phone number</p>
+<p style="font-size:12px;margin-top:8px">WhatsApp > Linked Devices > Link with phone number</p>
 </div>
-<p style="margin-top:12px;font-size:13px">SHAJU BOT - Created by Shaju Khan</p>
+
 <script>
 async function getCode(){
 let n=document.getElementById('num').value;
+if(n.length<10){document.getElementById('codeDisplay').innerText="ENTER VALID NUMBER";return;}
 document.getElementById('codeDisplay').innerText="WAIT...";
-try{let r=await fetch('/api/pair',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({number:n})});let d=await r.json();document.getElementById('codeDisplay').innerText=d.code;}catch(e){document.getElementById('codeDisplay').innerText="TRY AGAIN";}
+try{let r=await fetch('/api/pair',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({number:n})});let d=await r.json();document.getElementById('codeDisplay').innerText=d.code||"TRY AGAIN";}catch(e){document.getElementById('codeDisplay').innerText="SERVER OFF";}
 }
 </script>
 </body>
