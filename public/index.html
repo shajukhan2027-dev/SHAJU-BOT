@@ -5,17 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SHAJU BOT - Pair Your Bot</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial}
-body{overflow-x:hidden;background:#06281C}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{padding:12px;overflow-x:hidden;background:#0B3D2E}
 
-/* ===== LIVE GLOW GRAM - BACKGROUND ===== */
-.live-bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:linear-gradient(180deg,#0B3D2E 0%,#14532D 35%,#1E6B3A 60%,#06281C 100%)}
-.glow-sun{position:absolute;top:-50px;right:-20px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,#FFF59D 0%,#FFEB3B 30%,#FFC107 55%,transparent 70%);filter:blur(2px);animation:sunGlow 4s ease-in-out infinite}
-@keyframes sunGlow{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
-.glow-cloud{position:absolute;height:28px;border-radius:50px;background:rgba(255,255,255,.9);filter:blur(8px);animation:cloudMove linear infinite}
+/* ===== LIVE GLOW GRAM BACKGROUND - STICKER NA, DIRECT GLOW ===== */
+.live-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;overflow:hidden;background:linear-gradient(180deg,#0B3D2E 0%,#14532D 35%,#1E6B3A 60%,#0A2E1A 100%)}
+.glow-sun{position:absolute;top:-40px;right:-20px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,#FFF59D 0%,#FFEB3B 30%,#FFC107 55%,transparent 70%);filter:blur(2px);animation:sunGlow 4s ease-in-out infinite}
+@keyframes sunGlow{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.15);opacity:1}}
+.glow-cloud{position:absolute;height:28px;border-radius:50px;background:rgba(255,255,255,.85);filter:blur(8px);animation:cloudMove linear infinite}
 @keyframes cloudMove{from{left:-200px}to{left:110%}}
 .c1{top:60px;width:180px;animation-duration:40s}.c2{top:110px;width:120px;animation-duration:55s;opacity:.6}.c3{top:30px;width:90px;animation-duration:30s;opacity:.5}
-.firefly{position:absolute;width:6px;height:6px;border-radius:50%;background:#FFFF00;box-shadow:0 0 15px 6px #FFFF00;animation:flyFly linear infinite}
+.firefly{position:absolute;width:6px;height:6px;border-radius:50%;background:#FFFF00;box-shadow:0 0 15px 5px #FFFF00;animation:flyFly linear infinite}
 @keyframes flyFly{0%{transform:translate(0,0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translate(200px,-80px);opacity:0}}
 .f1{top:250px;left:10%;animation-duration:6s}.f2{top:320px;left:70%;animation-duration:8s;animation-delay:1s}.f3{top:200px;left:50%;animation-duration:5s;animation-delay:2s}.f4{top:350px;left:30%;animation-duration:7s;animation-delay:.5s}.f5{top:280px;left:85%;animation-duration:9s;animation-delay:1.5s}
 .tree-css{position:absolute;bottom:120px;width:10px;height:90px;background:#4A2C1A;border-radius:5px}
@@ -31,45 +31,36 @@ body{overflow-x:hidden;background:#06281C}
 .river-shine{position:absolute;bottom:60px;left:0;width:100%;height:2px;background:rgba(255,255,255,.6);filter:blur(1px);animation:shineMove 2s linear infinite}
 @keyframes shineMove{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
 
-/* ===== NEW HD DESIGN - SOB THIK ASE ===== */
-.wrap{position:relative;z-index:10;padding:14px;padding-bottom:190px;max-width:480px;margin:0 auto}
-.top-badge{text-align:center}
-.top-badge span{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:11px;padding:6px 14px;border-radius:20px;backdrop-filter:blur(10px)}
-.hero{text-align:center;padding:16px 0 0}
-.hero h1{font-size:42px;color:#fff;letter-spacing:1px;text-shadow:0 0 20px #FFEB3B,0 0 50px #4CAF50;line-height:1}
-.hero h1 small{display:block;font-size:18px;color:#C8E6C9;letter-spacing:4px;margin-top:4px}
-.hero p{font-size:12px;color:#E8F5E9;margin-top:10px;opacity:.9}
-.profile-wrap{text-align:center;margin-top:16px;position:relative}
-.profile{width:130px;height:130px;border-radius:50%;border:4px solid #fff;object-fit:cover;box-shadow:0 0 0 4px rgba(255,235,59,.3),0 0 40px #FFEB3B}
-.profile-name{color:#fff;font-weight:bold;margin-top:8px;font-size:16px;text-shadow:0 2px 10px #000}
-.profile-name span{font-weight:400;font-size:12px;opacity:.8;display:block}
-
-.card{background:rgba(255,255,255,.97);border-radius:24px;padding:20px;margin-top:16px;box-shadow:0 20px 40px rgba(0,0,0,.3)}
-.card h3{color:#1B5E20;text-align:center;font-size:20px}
+/* ===== TUMAR AGERTA - UPORE THAKBO ===== */
+.wrap{position:relative;z-index:10;padding-bottom:180px}
+.hero{text-align:center;padding:18px 0 5px}
+.hero h1{font-size:36px;color:#fff;text-shadow:0 0 20px #FFEB3B,0 0 40px #4CAF50}
+.hero h2{font-size:26px;color:#fff;font-style:italic;font-weight:400;text-shadow:0 0 15px #4CAF50}
+.hero p{font-size:13px;color:#fff;margin-top:6px;background:rgba(0,0,0,.4);display:inline-block;padding:4px 12px;border-radius:20px}
+.profile{width:150px;height:150px;border-radius:50%;border:5px solid #fff;object-fit:cover;margin:15px auto 0;display:block;box-shadow:0 0 30px #FFEB3B}
+.card{background:#fff;border-radius:20px;padding:18px;margin-top:15px;box-shadow:0 0 30px rgba(76,175,80,.5)}
+.card h3{color:#1B5E20;text-align:center;font-size:19px}
 .card p{font-size:12px;color:#777;text-align:center;margin-top:4px}
-.inputbox{display:flex;align-items:center;border:2px solid #C8E6C9;border-radius:14px;padding:12px;margin-top:16px;background:#F1F8E9}
-.inputbox:focus-within{border-color:#2E7D32;box-shadow:0 0 0 3px rgba(46,125,50,.15)}
-.inputbox input{border:none;outline:none;width:100%;font-size:16px;margin-left:8px;background:transparent;font-weight:600}
-.wa-icon{width:28px;height:28px}
-.btn{width:100%;background:linear-gradient(90deg,#1B5E20,#2E7D32,#43A047);color:#fff;border:none;padding:15px;border-radius:14px;font-size:16px;font-weight:bold;margin-top:14px;cursor:pointer;box-shadow:0 8px 20px rgba(46,125,50,.4)}
-.btn:active{transform:scale(.98)}
+.inputbox{display:flex;align-items:center;border:2px solid #81C784;border-radius:12px;padding:10px 12px;margin-top:14px}
+.inputbox input{border:none;outline:none;width:100%;font-size:15px;margin-left:8px}
+.wa-icon{width:26px;height:26px;flex-shrink:0}
+.btn{width:100%;background:linear-gradient(90deg,#2E7D32,#43A047);color:#fff;border:none;padding:14px;border-radius:12px;font-size:15px;font-weight:bold;margin-top:12px;cursor:pointer;box-shadow:0 0 20px rgba(76,175,80,.6)}
 .btn:disabled{background:#aaa;box-shadow:none}
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;text-align:center;margin-top:16px}
-.steps div{font-size:10px;color:#666;background:#F1F8E9;padding:8px 2px;border-radius:10px}
-.num{width:24px;height:24px;background:#2E7D32;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 5px;font-weight:bold}
-
-.codebox{background:#fff;border-radius:20px;padding:16px;margin-top:12px;text-align:center;box-shadow:0 0 25px rgba(255,235,59,.5);border:2px dashed #A5D6A7}
-.code{font-size:28px;letter-spacing:4px;background:#E8F5E9;padding:12px;border-radius:12px;color:#1B5E20;font-weight:900;margin-top:8px}
-.status{background:rgba(255,255,255,.95);border-radius:14px;padding:14px;margin-top:12px;display:flex;justify-content:space-between;align-items:center}
-.status b{color:#1B5E20}
-.on{color:#2e7d32;font-weight:bold}
-.about{background:rgba(255,255,255,.97);border-radius:24px;padding:18px;margin-top:12px}
+.steps{display:flex;justify-content:space-between;text-align:center;margin-top:14px}
+.steps div{width:23%;font-size:10px;color:#666}
+.num{width:22px;height:22px;background:#2E7D32;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 5px}
+.status{background:#fff;border-radius:14px;padding:14px;margin-top:12px;display:flex;justify-content:space-between;align-items:center}
+.status b{color:#1B5E20;font-size:13px}
+.on{color:#2e7d32;font-weight:bold;font-size:14px}
+.codebox{background:#fff;border-radius:14px;padding:14px;margin-top:10px;text-align:center;box-shadow:0 0 20px rgba(255,235,59,.4)}
+.code{font-size:24px;letter-spacing:3px;background:#E8F5E9;padding:10px;border-radius:8px;color:#1B5E20;font-weight:bold;margin-top:6px}
+.about{background:#fff;border-radius:20px;padding:18px;margin-top:12px}
 .about h3{color:#1B5E20}
 .about p{font-size:12px;color:#666;line-height:1.6;margin-top:8px}
-.cmds{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.cmd{background:#F1F8E9;padding:12px;border-radius:14px;font-size:12px;border:1px solid #DCEDC8}
-.cmd b{color:#1B5E20;font-size:13px}
-.footer{text-align:center;color:#fff;font-weight:600;margin:18px 0 0;text-shadow:0 0 10px #4CAF50;font-size:13px}
+.cmds{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.cmd{background:#F1F8E9;padding:10px;border-radius:10px;font-size:12px;border:1px solid #C8E6C9}
+.cmd b{color:#1B5E20}
+.footer{text-align:center;font-style:italic;color:#fff;margin:15px 0;text-shadow:0 0 10px #4CAF50}
 </style>
 </head>
 <body>
@@ -82,17 +73,13 @@ body{overflow-x:hidden;background:#06281C}
 </div>
 
 <div class="wrap">
-<div class="top-badge"><span>🌾 GRAMER TOP 1 BOT • LIVE GLOW 🌾</span></div>
-
 <div class="hero">
-<h1>SHAJU BOT<small>PAIR YOUR BOT</small></h1>
-<p>Live Glow Gram Theme - Get Your WhatsApp Pair Code Easily</p>
+<h1>👑 SHAJU BOT</h1>
+<h2>Pair Your Bot</h2>
+<p>Live Glow Gram Theme - Get Your WhatsApp Pair Code Easily From Here</p>
 </div>
 
-<div class="profile-wrap">
 <img src="photo.jpg" class="profile" onerror="this.style.display='none'">
-<div class="profile-name">Shaju Khan<span>Owner - SHAJU BOT</span></div>
-</div>
 
 <div class="card">
 <h3>Get Your Pair Code</h3>
@@ -101,7 +88,58 @@ body{overflow-x:hidden;background:#06281C}
 <img class="wa-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
 <input id="num" value="880" placeholder="88017XXXXXXXX">
 </div>
-<p style="text-align:left;font-size:11px;margin-top:6px">Example: 88017XXXXXXXX - Space / + diba na!</p>
-<button class="btn" id="pairBtn" onclick="getCode()">Get My Pair Code →</button>
+<p style="text-align:left;font-size:11px;margin-top:5px">Example: 88017XXXXXXXX - Space / + diba na!</p>
+<button class="btn" id="pairBtn" onclick="getCode()">Get My Pair Code</button>
 <div class="steps">
-<div>
+<div><div class="num">1</div>Enter Your Number</div>
+<div><div class="num">2</div>Tap Get My Pair Code</div>
+<div><div class="num">3</div>Open Linked Devices</div>
+<div><div class="num">4</div>Type The Code</div>
+</div>
+</div>
+
+<div class="codebox"><b style="color:#1B5E20;font-size:13px">Pairing Code</b><div class="code" id="codeDisplay">- - - -</div><p style="font-size:11px;color:#888;margin-top:5px" id="codeHint">Your Latest Code Appears Here - 20 Sec er bhitre deo!</p></div>
+
+<div class="status"><b>Bot Status</b><span class="on">● Online</span></div>
+
+<div class="footer">Stay Connected With SHAJU BOT</div>
+
+<div class="about">
+<h3>About - Working Commands</h3>
+<p>SHAJU BOT is a WhatsApp Bot. Pair your number here, and the bot will start working on your WhatsApp. The commands below are 100% working:</p>
+<div class="cmds">
+<div class="cmd"><b>.menu</b><br>Show All Commands</div>
+<div class="cmd"><b>.ping</b><br>Check Bot Speed</div>
+<div class="cmd"><b>.alive</b><br>Bot Status</div>
+<div class="cmd"><b>.tagall</b><br>Tag All Members</div>
+<div class="cmd"><b>.owner</b><br>Owner Information</div>
+<div class="cmd"><b>.kick</b><br>Reply To Kick User</div>
+<div class="cmd"><b>.song</b><br>.song + Song Name</div>
+<div class="cmd"><b>Auto Welcome + Anti-Link</b><br>Works Automatically In Group</div>
+</div>
+</div>
+</div>
+
+<script>
+let canClick = true;
+async function getCode(){
+  if(!canClick) return;
+  let n=document.getElementById('num').value.replace(/[^0-9]/g,'');
+  if(n.length<10){document.getElementById('codeDisplay').innerText="INVALID";return;}
+  document.getElementById('codeDisplay').innerText="WAIT...";
+  canClick = false;
+  let btn = document.getElementById('pairBtn');
+  btn.disabled = true;
+  btn.innerText = "Wait 30 Sec...";
+  setTimeout(()=>{ canClick=true; btn.disabled=false; btn.innerText="Get My Pair Code"; }, 30000);
+  try{
+    let r=await fetch('/api/pair',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({number:n})});
+    let d=await r.json();
+    document.getElementById('codeDisplay').innerText=d.code||"TRY AGAIN";
+    if(d.code==="ALREADY LINKED") document.getElementById('codeHint').innerText="Bot Agei Link Ase! Group e .menu likho!";
+    else document.getElementById('codeHint').innerText="Code paiso? Loge Loge WhatsApp e deo! Screenshot nio na!";
+  }catch(e){document.getElementById('codeDisplay').innerText="OFFLINE";}
+}
+</script>
+</body>
+</html>
