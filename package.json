@@ -1,14 +1,16 @@
-‎{
-‎  "name": "shaju-bot",
-‎  "version": "1.0.0",
-‎  "main": "server.js",
-‎  "scripts": {
-‎    "start": "node server.js"
-‎  },
-‎  "dependencies": {
-‎    "express": "^4.18.2",
-‎    "@whiskeysockets/baileys": "^6.7.18",
-‎    "pino": "^8.0.0"
-‎  }
-‎}
-‎
+{
+  "name": "shaju-bot",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "latest",
+    "@whiskeysockets/baileys": "latest",
+    "pino": "latest",
+    "qrcode": "latest",
+    "yt-search": "latest",
+    "@distube/ytdl-core": "latest"
+  }
+}
