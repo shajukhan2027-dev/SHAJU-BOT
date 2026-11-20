@@ -14,19 +14,26 @@ body{padding:12px;overflow-x:hidden;background:#0B3D2E}
 @keyframes cloudMove{from{left:-200px}to{left:110%}}
 .c1{top:50px;width:180px;animation-duration:40s}.c2{top:95px;width:120px;animation-duration:55s;opacity:.7}.c3{top:20px;width:90px;animation-duration:30s;opacity:.6}
 .paddy{position:absolute;bottom:120px;left:0;width:100%;height:70px;background:repeating-linear-gradient(90deg,#4CAF50 0 20px,#66BB6A 20px 40px,#2E7D32 40px 60px);opacity:.9;box-shadow:0 0 30px #4CAF50}
-.boat{position:absolute;bottom:85px;left:20%;width:90px;height:22px;background:#6D4C41;border-radius:0 0 45px 45px;animation:boatMove 8s ease-in-out infinite}
+.paddy::before{content:'';position:absolute;top:-15px;left:0;width:100%;height:15px;background:radial-gradient(circle,#81C784 20%,transparent 30%);background-size:30px 15px;animation:paddyGlow 2s infinite}
+@keyframes paddyGlow{0%,100%{opacity:.6}50%{opacity:1}}
+.boat{position:absolute;bottom:85px;left:20%;width:90px;height:22px;background:#6D4C41;border-radius:0 0 45px 45px;box-shadow:0 0 20px rgba(255,193,7,.5);animation:boatMove 8s ease-in-out infinite}
+.boat::before{content:'';position:absolute;top:-28px;left:40px;width:4px;height:30px;background:#4A2C1A}
+.boat::after{content:'';position:absolute;top:-28px;left:44px;width:28px;height:26px;background:rgba(255,255,255,.85);clip-path:polygon(0 100%,100% 100%,0 0)}
 @keyframes boatMove{0%,100%{transform:translateX(0) rotate(-2deg)}50%{transform:translateX(40px) rotate(2deg)}}
 .palm{position:absolute;bottom:190px;left:4%;width:8px;height:80px;background:#5D4037;border-radius:5px;transform:rotate(-8deg)}
-.palm::before{content:'';position:absolute;top:-30px;left:-35px;width:80px;height:35px;background:radial-gradient(ellipse,#66BB6A,#2E7D32);border-radius:50%}
+.palm::before{content:'';position:absolute;top:-30px;left:-35px;width:80px;height:35px;background:radial-gradient(ellipse,#66BB6A,#2E7D32);border-radius:50%;box-shadow:0 0 25px #4CAF50}
 .palm2{left:auto;right:4%;transform:rotate(8deg)}
-.house-css{position:absolute;bottom:190px;left:50%;transform:translateX(-50%);width:130px;height:90px;background:linear-gradient(#8D6E63,#6D4C41);border-radius:8px 8px 0 0}
+.house-css{position:absolute;bottom:190px;left:50%;transform:translateX(-50%);width:130px;height:90px;background:linear-gradient(#8D6E63,#6D4C41);border-radius:8px 8px 0 0;box-shadow:0 0 40px rgba(255,193,7,.4)}
 .house-css::before{content:'';position:absolute;top:-42px;left:-10px;width:150px;height:45px;background:#5D4037;clip-path:polygon(50% 0,100% 100%,0 100%)}
-.house-css::after{content:'';position:absolute;top:30px;left:45px;width:32px;height:40px;background:#FFEB3B;box-shadow:0 0 25px #FFEB3B;border-radius:3px}
+.house-css::after{content:'';position:absolute;top:30px;left:45px;width:32px;height:40px;background:#FFEB3B;box-shadow:0 0 25px #FFEB3B;animation:windowGlow 2s infinite;border-radius:3px}
+@keyframes windowGlow{0%,100%{box-shadow:0 0 15px #FFEB3B}50%{box-shadow:0 0 35px #FFEB3B}}
 .firefly{position:absolute;width:6px;height:6px;border-radius:50%;background:#FFFF00;box-shadow:0 0 15px 5px #FFFF00;animation:flyFly linear infinite}
 @keyframes flyFly{0%{transform:translate(0,0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translate(200px,-80px);opacity:0}}
 .f1{top:250px;left:10%;animation-duration:6s}.f2{top:320px;left:70%;animation-duration:8s;animation-delay:1s}.f3{top:200px;left:50%;animation-duration:5s;animation-delay:2s}.f4{top:350px;left:30%;animation-duration:7s;animation-delay:.5s}.f5{top:280px;left:85%;animation-duration:9s;animation-delay:1.5s}
-.river-glow{position:absolute;bottom:0;left:0;width:100%;height:120px;background:linear-gradient(90deg,#0D47A1,#1565C0,#00BCD4,#1565C0,#0D47A1);background-size:300% 100%;animation:waterFlow 3s linear infinite}
+.river-glow{position:absolute;bottom:0;left:0;width:100%;height:120px;background:linear-gradient(90deg,#0D47A1,#1565C0,#00BCD4,#1565C0,#0D47A1);background-size:300% 100%;animation:waterFlow 3s linear infinite;box-shadow:0 -5px 30px rgba(0,188,212,.6)}
 @keyframes waterFlow{from{background-position:0% 0}to{background-position:300% 0}}
+.river-shine{position:absolute;bottom:60px;left:0;width:100%;height:2px;background:rgba(255,255,255,.6);filter:blur(1px);animation:shineMove 2s linear infinite}
+@keyframes shineMove{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
 .wrap{position:relative;z-index:10;padding-bottom:220px}
 .hero{text-align:center;padding:18px 0 5px}
 .hero h1{font-size:36px;color:#fff;text-shadow:0 0 20px #FFEB3B,0 0 40px #4CAF50}
@@ -57,6 +64,7 @@ body{padding:12px;overflow-x:hidden;background:#0B3D2E}
 </style>
 </head>
 <body>
+
 <div class="live-bg">
   <div class="glow-sun"></div><div class="glow-cloud c1"></div><div class="glow-cloud c2"></div><div class="glow-cloud c3"></div>
   <div class="firefly f1"></div><div class="firefly f2"></div><div class="firefly f3"></div><div class="firefly f4"></div><div class="firefly f5"></div>
@@ -64,14 +72,17 @@ body{padding:12px;overflow-x:hidden;background:#0B3D2E}
   <div class="house-css"></div>
   <div class="paddy"></div>
   <div class="boat"></div>
-  <div class="river-glow"></div>
+  <div class="river-shine"></div><div class="river-glow"></div>
 </div>
+
 <div class="wrap">
 <div class="hero">
 <h1>👑 SHAJU BOT</h1>
 <h2>Pair Your Bot</h2>
 </div>
+
 <img src="photo.jpg" class="profile" onerror="this.style.display='none'">
+
 <div class="card">
 <h3>Get Your Pair Code</h3>
 <p>Enter Your WhatsApp Number With Country Code</p>
@@ -88,14 +99,15 @@ body{padding:12px;overflow-x:hidden;background:#0B3D2E}
 <div><div class="num">4</div>Type The Code</div>
 </div>
 </div>
+
 <div class="codebox"><b style="color:#1B5E20;font-size:13px">Pairing Code</b><div class="code" id="codeDisplay">- - - -</div><p style="font-size:11px;color:#888;margin-top:5px" id="codeHint">Your Latest Code Appears Here - 20 Sec er bhitre deo!</p></div>
+
 <div class="status"><b>Bot Status</b><span class="on">● Online</span></div>
+
 <div class="about">
 <h3>About - Working Commands</h3>
-<p>SHAJU BOT is a WhatsApp Bot. Pair your number here, and the bot will start working on your WhatsApp.</p>
+<p>SHAJU BOT is a WhatsApp Bot. Pair your number here, and the bot will start working on your WhatsApp. The commands below are 100% working:</p>
 <div class="cmds">
-<div class="cmd"><b>.open</b><br>Group Khulo</div>
-<div class="cmd"><b>.close</b><br>Group Bondho</div>
 <div class="cmd"><b>.menu</b><br>Show All Commands</div>
 <div class="cmd"><b>.ping</b><br>Check Bot Speed</div>
 <div class="cmd"><b>.alive</b><br>Bot Status</div>
@@ -103,10 +115,11 @@ body{padding:12px;overflow-x:hidden;background:#0B3D2E}
 <div class="cmd"><b>.owner</b><br>Owner Information</div>
 <div class="cmd"><b>.kick</b><br>Reply To Kick User</div>
 <div class="cmd"><b>.song</b><br>.song + Song Name</div>
-<div class="cmd"><b>Auto Welcome + Anti-Link</b><br>Works Automatically</div>
+<div class="cmd"><b>Auto Welcome + Anti-Link</b><br>Works Automatically In Group</div>
 </div>
 </div>
 </div>
+
 <script>
 let canClick = true;
 async function getCode(){
@@ -124,7 +137,7 @@ async function getCode(){
     let d=await r.json();
     document.getElementById('codeDisplay').innerText=d.code||"TRY AGAIN";
     if(d.code==="ALREADY LINKED") document.getElementById('codeHint').innerText="Bot Agei Link Ase! Group e .menu likho!";
-    else document.getElementById('codeHint').innerText="Code paiso? Loge Loge WhatsApp e deo!";
+    else document.getElementById('codeHint').innerText="Code paiso? Loge Loge WhatsApp e deo! Screenshot nio na!";
   }catch(e){document.getElementById('codeDisplay').innerText="OFFLINE";}
 }
 </script>
