@@ -4,6 +4,7 @@ const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 let sock = null;
+let isPairing = false;
 
 async function startBot(){
   const { default: makeWASocket, useMultiFileAuthState, DisconnectReason } = require('@whiskeysockets/baileys');
@@ -12,14 +13,14 @@ async function startBot(){
     auth: state,
     printQRInTerminal: false,
     logger: require('pino')({level:'silent'}),
-    browser: ['SHAJU BOT', 'Chrome', '1.0'] // <-- EITA LAGBOI, NAILE LINK OIBO NA
+    browser: ['SHAJU BOT', 'Chrome', '1.0']
   });
   sock.ev.on('creds.update', saveCreds);
 
   sock.ev.on('group-participants.update', async (u)=>{
     if(u.action === 'add'){
       for(let p of u.participants){
-        try{ await sock.sendMessage(u.id, {text: `Welcome @${p.split('@')[0]} to the group! Type *.menu*`, mentions:[p]}); }catch(e){}
+        try{ await sock.sendMessage(u.id, {text: `👋 Welcome @${p.split('@')[0]} to the group! Type *.menu*`, mentions:[p]}); }catch(e){}
       }
     }
   });
@@ -43,7 +44,7 @@ async function startBot(){
       if(isGroup && (text.includes('https://') || text.includes('http://') || text.includes('wa.me/') || text.includes('chat.whatsapp.com/'))){
         try{
           await sock.sendMessage(from, {delete: msg.key});
-          await sock.sendMessage(from, {text: `Link not allowed @${sender.split('@')[0]}`, mentions:[sender]});
+          await sock.sendMessage(from, {text: `🚫 Link not allowed @${sender.split('@')[0]}`, mentions:[sender]});
         }catch(e){}
         return;
       }
@@ -54,7 +55,7 @@ async function startBot(){
 
       let reply = "";
       if(cmdName === 'menu' || cmdName === 'hi' || cmdName === 'hello' || cmdName === 'help'){
-        reply = "*SHAJU BOT - TOP 1 GROUP BOT*\n\n*.menu* - Show menu\n*.alive* - Bot alive?\n*.owner* - Owner info\n*.tagall* - Tag all members\n*.kick* - Reply to kick\n*.song* - Download song\n\nGroup: Welcome + Anti-Link Auto ON";
+        reply = "*👑 SHAJU BOT - TOP 1 GROUP BOT*\n\n*.menu* - Show menu\n*.alive* - Bot alive?\n*.owner* - Owner info\n*.tagall* - Tag all members\n*.kick* - Reply to kick\n*.song* - Download song\n\nGroup: Welcome + Anti-Link Auto ON";
       }
       else if(cmdName === 'alive' || cmdName === 'ping'){
         reply = "✅ SHAJU BOT is Alive!\nBot is Working 100%";
@@ -66,13 +67,12 @@ async function startBot(){
         try{
           const meta = await sock.groupMetadata(from);
           const members = meta.participants.map(p=>p.id);
-          let txt = "*TAG ALL - SHAJU BOT*\n\n";
+          let txt = "*📢 TAG ALL - SHAJU BOT*\n\n";
           members.forEach(m=> txt += `@${m.split('@')[0]} `);
           await sock.sendMessage(from, {text: txt, mentions: members});
           return;
         }catch(e){ reply = "Bot ke Admin banau, tarpor .tagall likho"; }
       }
-      // KICK - EITA AGE ASIL NA
       else if(cmdName === 'kick' && isGroup){
         try{
           let target = msg.message?.extendedTextMessage?.contextInfo?.participant || msg.message?.extendedTextMessage?.contextInfo?.mentionedJid?.[0];
@@ -80,9 +80,9 @@ async function startBot(){
           else { await sock.groupParticipantsUpdate(from, [target], 'remove'); reply = "✅ Kicked Successfully - SHAJU BOT"; }
         }catch(e){ reply = "Bot ke Admin banau!"; }
       }
-      // SONG - EITA AGE ASIL NA
       else if(cmdName === 'song'){
-        let query = raw.slice(5).trim();
+        // THIK KORA: .song + space = 6 ta katlam
+        let query = raw.slice(6).trim();
         if(!query){ reply = "Likho: .song premke rangme"; }
         else {
           try{
@@ -91,10 +91,13 @@ async function startBot(){
             const ytdl = require('@distube/ytdl-core');
             let s = await yts(query);
             let v = s.videos[0];
-            let stream = ytdl(v.url, {filter:'audioonly', quality:'highestaudio'});
-            let chunks=[]; for await(let c of stream) chunks.push(c);
-            await sock.sendMessage(from, {audio: Buffer.concat(chunks), mimetype:'audio/mp4', fileName: v.title+'.mp3'});
-            return;
+            if(!v){ reply = "❌ Song painai"; }
+            else {
+              let stream = ytdl(v.url, {filter:'audioonly', quality:'highestaudio'});
+              let chunks=[]; for await(let c of stream) chunks.push(c);
+              await sock.sendMessage(from, {audio: Buffer.concat(chunks), mimetype:'audio/mp4', fileName: v.title+'.mp3'});
+              return;
+            }
           }catch(e){ reply = "❌ Song painai, arekta naam deo"; }
         }
       }
@@ -105,7 +108,6 @@ async function startBot(){
     }catch(e){ console.log("ERROR:", e); }
   });
 
-  // THIK KORA CONNECTION - LOGOUT OILE RESTART MARTO NA
   sock.ev.on('connection.update', (u)=>{
     console.log("CONNECTION:", u.connection);
     if(u.connection==='close'){
@@ -122,18 +124,21 @@ async function startBot(){
 }
 startBot().catch(e=>console.log(e));
 
-// THIK KORA PAIR API
+// THIK KORA PAIR API - Age wait korbo
 app.post('/api/pair', async (req,res)=>{
   try{
-    let number = req.body.number.replace(/[^0-9]/g,'');
+    let number = (req.body.number || '').toString().replace(/[^0-9]/g,'');
+    if(!number) return res.json({code:"INVALID"});
     if(!sock) return res.json({code:"WAIT 10 SEC"});
-    // Agei link thakle
+    if(isPairing) return res.json({code:"WAIT..."});
     if(sock.authState?.creds?.registered){
       return res.json({code:"ALREADY LINKED"});
     }
+    isPairing = true;
     let code = await sock.requestPairingCode(number);
+    isPairing = false;
     res.json({code: code});
-  }catch(e){ console.log(e); res.json({code:"TRY AGAIN"}); }
+  }catch(e){ console.log(e); isPairing = false; res.json({code:"TRY AGAIN"}); }
 });
 app.get('/', (req,res)=> res.sendFile(path.join(__dirname,'public','index.html')));
 app.listen(process.env.PORT || 3000, ()=> console.log("Running"));
