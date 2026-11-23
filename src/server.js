@@ -7,7 +7,12 @@ const crypto = require("crypto");
 const rateLimit = require("express-rate-limit");
 const path = require("path");
 
-const { requestPairingCode, getStatus } = require("./whatsapp");
+const {
+  requestPairingCode,
+  getStatus,
+  initializeSessions
+} = require("./whatsapp");
+
 const { getSettings } = require("./features");
 
 const app = express();
@@ -160,6 +165,10 @@ app.get("*", (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`🔥 SHAJU BOT running on port ${PORT}`);
+
+  initializeSessions().catch(error => {
+    console.error("Session initialization failed:", error.message);
+  });
 });
