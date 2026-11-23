@@ -11,59 +11,36 @@ const pino = require("pino");
 const path = require("path");
 const fs = require("fs");
 
+const { handleMessage } = require("./features");
+
 const sessions = new Map();
 const pending = new Map();
 
-const sessionRoot = path.join(
-  __dirname,
-  "..",
-  "sessions"
-);
+const sessionRoot = path.join(__dirname, "..", "sessions");
 
-async function requestPairingCode(
-  ownerId,
-  phoneNumber
-) {
+async function requestPairingCode(ownerId, phoneNumber) {
   if (pending.has(ownerId)) {
-    throw new Error(
-      "Pairing request already in progress."
-    );
+    throw new Error("Pairing request already in progress.");
   }
 
   pending.set(ownerId, true);
 
   try {
-    const authDir = path.join(
-      sessionRoot,
-      ownerId
-    );
+    const authDir = path.join(sessionRoot, ownerId);
 
-    fs.mkdirSync(authDir, {
-      recursive: true
-    });
+    fs.mkdirSync(authDir, { recursive: true });
 
-    const {
-      state,
-      saveCreds
-    } = await useMultiFileAuthState(authDir);
+    const { state, saveCreds } =
+      await useMultiFileAuthState(authDir);
 
     const sock = makeWASocket({
       auth: state,
-      logger: pino({
-        level: "silent"
-      }),
+      logger: pino({ level: "silent" }),
       printQRInTerminal: false,
-      browser: [
-        "SHAJU BOT",
-        "Chrome",
-        "1.0.0"
-      ]
+      browser: ["SHAJU BOT", "Chrome", "1.0.0"]
     });
 
-    sock.ev.on(
-      "creds.update",
-      saveCreds
-    );
+    sock.ev.on("creds.update", saveCreds);
 
     const session = {
       sock,
@@ -73,39 +50,37 @@ async function requestPairingCode(
 
     sessions.set(ownerId, session);
 
-    sock.ev.on(
-      "connection.update",
-      (update) => {
-        const current = sessions.get(ownerId);
+    sock.ev.on("messages.upsert", async ({ messages, type }) => {
+      if (type !== "notify") return;
 
-        if (!current) return;
+      for (const message of messages) {
+        await handleMessage(ownerId, message, sock);
+      }
+    });
 
-        if (update.connection === "open") {
-          current.status = "connected";
-        }
+    sock.ev.on("connection.update", (update) => {
+      const current = sessions.get(ownerId);
+      if (!current) return;
 
-        if (update.connection === "close") {
-          current.status = "disconnected";
+      if (update.connection === "open") {
+        current.status = "connected";
+        console.log("SHAJU BOT connected:", ownerId);
+      }
 
-          const code =
-            update.lastDisconnect
-              ?.error
-              ?.output
-              ?.statusCode;
+      if (update.connection === "close") {
+        current.status = "disconnected";
 
-          if (
-            code === DisconnectReason.loggedOut
-          ) {
-            sessions.delete(ownerId);
-          }
+        const code =
+          update.lastDisconnect?.error?.output?.statusCode;
+
+        if (code === DisconnectReason.loggedOut) {
+          sessions.delete(ownerId);
         }
       }
-    );
+    });
 
     const pairingCode =
-      await sock.requestPairingCode(
-        phoneNumber
-      );
+      await sock.requestPairingCode(phoneNumber);
 
     return pairingCode;
 
@@ -129,8 +104,7 @@ async function getStatus(ownerId) {
   }
 
   return {
-    connected:
-      session.status === "connected",
+    connected: session.status === "connected",
     status: session.status
   };
 }
