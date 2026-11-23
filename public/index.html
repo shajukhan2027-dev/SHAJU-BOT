@@ -4,174 +4,147 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#071510">
-<title>SHAJU BOT | WhatsApp Pairing</title>
+<meta name="theme-color" content="#071411">
+<title>SHAJU BOT - WhatsApp Platform</title>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{
-  min-height:100vh;
-  color:#effff6;
   font-family:Arial,sans-serif;
-  background:
-    radial-gradient(circle at 15% 15%,#124d36,transparent 35%),
-    radial-gradient(circle at 90% 85%,#541b49,transparent 35%),
-    #07110e;
+  background:#071411;
+  color:#fff;
+  min-height:100vh;
   overflow-x:hidden;
 }
 body:before{
   content:"";
   position:fixed;
-  inset:0;
-  pointer-events:none;
-  background:linear-gradient(120deg,transparent,#29e99b0b,transparent);
-  animation:glow 7s infinite alternate;
+  width:350px;height:350px;
+  background:#00ff9950;
+  filter:blur(120px);
+  top:-100px;left:-100px;
+  z-index:-1;
 }
-@keyframes glow{
-  from{transform:translateX(-20%)}
-  to{transform:translateX(20%)}
+body:after{
+  content:"";
+  position:fixed;
+  width:350px;height:350px;
+  background:#ff00a640;
+  filter:blur(120px);
+  bottom:-100px;right:-100px;
+  z-index:-1;
 }
 header{
+  padding:22px 7%;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:22px 7%;
-  border-bottom:1px solid #ffffff15;
-  backdrop-filter:blur(15px);
+  border-bottom:1px solid #ffffff18;
 }
 .logo{
-  font-size:25px;
-  font-weight:900;
-  letter-spacing:2px;
-  color:#63f5b0;
+  font-size:25px;font-weight:900;
+  background:linear-gradient(90deg,#00ff99,#ff36b5);
+  -webkit-background-clip:text;
+  color:transparent;
 }
-.logo span{color:#f36ac4}
-nav a{
-  color:#c9e7d8;
-  text-decoration:none;
-  margin-left:20px;
-  font-size:14px;
+.live{
+  color:#00ff99;
+  font-size:12px;
+  border:1px solid #00ff9960;
+  padding:8px 13px;border-radius:30px;
 }
-main{
-  width:min(1050px,92%);
-  margin:65px auto;
-}
+main{max-width:850px;margin:auto;padding:45px 18px}
 .hero{text-align:center;margin-bottom:35px}
 .hero h1{
-  font-size:clamp(38px,8vw,70px);
-  font-weight:900;
-  background:linear-gradient(90deg,#57f4a8,#f36ac4);
-  color:transparent;
-  background-clip:text;
+  font-size:42px;
+  margin-bottom:12px;
+  background:linear-gradient(90deg,#00ff99,#ff36b5);
+  -webkit-background-clip:text;color:transparent;
 }
-.hero p{color:#a9cbb9;margin-top:12px;line-height:1.7}
-.panel{
-  background:#10251cdd;
-  border:1px solid #3b765b;
-  border-radius:25px;
-  padding:30px;
-  box-shadow:0 20px 80px #0008;
-  backdrop-filter:blur(18px);
-  animation:appear .8s ease;
+.hero p{color:#aabbb3;line-height:1.7}
+.card{
+  background:#10231dce;
+  border:1px solid #ffffff18;
+  border-radius:18px;
+  padding:23px;
+  margin-bottom:20px;
+  box-shadow:0 10px 35px #0005;
+  backdrop-filter:blur(12px);
 }
-@keyframes appear{
-  from{opacity:0;transform:translateY(25px)}
-  to{opacity:1;transform:translateY(0)}
-}
-.panel h2{margin-bottom:12px;color:#76f6b7}
-.panel p{color:#b7d2c4;line-height:1.7}
-.input-area{
-  display:flex;
-  gap:10px;
-  margin:25px 0;
-  flex-wrap:wrap;
-}
+h2{font-size:19px;margin-bottom:18px}
 input{
-  flex:1;
-  min-width:200px;
-  padding:16px;
-  background:#07140e;
-  border:1px solid #3d7559;
-  color:white;
-  border-radius:12px;
-  font-size:16px;
-  outline:none;
+  width:100%;padding:15px;
+  background:#071411;border:1px solid #315447;
+  border-radius:10px;color:white;
+  font-size:16px;outline:none;
+  margin-bottom:13px;
 }
 button{
-  border:0;
-  padding:15px 22px;
-  border-radius:12px;
-  background:linear-gradient(100deg,#54eaa5,#ef69bd);
-  color:#07130e;
-  font-weight:bold;
+  border:0;border-radius:10px;
+  padding:14px 18px;
+  background:linear-gradient(90deg,#00d982,#00a8a0);
+  color:#06130e;font-weight:bold;
+  cursor:pointer;width:100%;
   font-size:15px;
-  cursor:pointer;
-  transition:.3s;
-}
-button:hover{
-  transform:translateY(-3px);
-  box-shadow:0 8px 25px #4be9a555;
 }
 button:disabled{opacity:.5;cursor:wait}
-.codebox{
-  text-align:center;
-  margin:25px 0;
-  padding:22px;
-  border-radius:15px;
-  background:#06120d;
-  border:1px solid #285e43;
-}
 .code{
-  color:#6cf6b3;
-  font-size:clamp(25px,7vw,38px);
-  letter-spacing:7px;
-  font-weight:bold;
-  margin:10px 0;
+  margin-top:16px;
+  padding:18px;
+  text-align:center;
+  background:#06110d;
+  border:1px dashed #00ff99;
+  border-radius:12px;
+  color:#00ff99;
+  font-size:26px;
+  letter-spacing:5px;
+  display:none;
 }
 .status{
-  background:#07150e;
-  border:1px solid #28543d;
-  border-radius:12px;
-  padding:15px;
-  color:#8cf0b8;
-  margin-top:18px;
+  display:flex;align-items:center;gap:10px;
+  color:#b9c9c2;font-size:14px;
 }
-.features{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
-  gap:15px;
-  margin-top:28px;
+.dot{
+  width:10px;height:10px;border-radius:50%;
+  background:#ffb02e;
+  box-shadow:0 0 12px currentColor;
 }
-.feature{
-  background:#0a1b13;
-  border:1px solid #28533c;
-  border-radius:15px;
-  padding:20px;
+.dot.on{background:#00ff99}
+.setting{
+  display:flex;justify-content:space-between;
+  align-items:center;gap:12px;
+  padding:15px 0;border-bottom:1px solid #ffffff13;
+}
+.setting:last-child{border:0}
+.setting small{display:block;color:#91a69b;margin-top:5px}
+.switch{position:relative;width:48px;height:26px;flex-shrink:0}
+.switch input{display:none}
+.track{
+  position:absolute;inset:0;
+  background:#43534c;border-radius:30px;cursor:pointer;
   transition:.3s;
 }
-.feature:hover{
-  transform:translateY(-5px);
-  border-color:#62eeb0;
+.track:before{
+  content:"";position:absolute;
+  width:18px;height:18px;left:4px;top:4px;
+  border-radius:50%;background:white;transition:.3s;
 }
-.feature h3{font-size:16px;margin-bottom:9px}
-.feature p{font-size:13px;color:#a6c4b3}
-.music{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  z-index:5;
+.switch input:checked+.track{background:#00c77b}
+.switch input:checked+.track:before{transform:translateX(22px)}
+.note{color:#8ea69a;font-size:12px;line-height:1.6;margin-top:15px}
+footer{text-align:center;padding:25px;color:#789087;font-size:12px}
+.toast{
+  position:fixed;bottom:20px;left:50%;
+  transform:translateX(-50%);
+  background:#17372a;color:#fff;
+  padding:13px 20px;border-radius:10px;
+  display:none;z-index:5;
+  max-width:90%;text-align:center;
 }
-footer{
-  text-align:center;
-  color:#789989;
-  padding:35px 10px;
-  font-size:13px;
-}
-@media(max-width:600px){
-  header{padding:18px 5%}
-  nav a{margin-left:8px;font-size:12px}
-  main{margin:40px auto}
-  .panel{padding:20px}
+@media(max-width:500px){
+  .hero h1{font-size:33px}
+  header{padding:18px}
+  main{padding-top:30px}
 }
 </style>
 </head>
@@ -179,206 +152,212 @@ footer{
 <body>
 
 <header>
-  <div class="logo">SHAJU <span>BOT</span></div>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#pair">Pair</a>
-    <a href="#features">Features</a>
-  </nav>
+  <div class="logo">🔥 SHAJU BOT</div>
+  <div class="live">● SYSTEM LIVE</div>
 </header>
 
-<main id="home">
+<main>
 
-  <section class="hero">
-    <h1>SHAJU BOT</h1>
-    <p>Next Generation WhatsApp Bot Platform<br>
-    Connect your WhatsApp and experience more.</p>
-  </section>
+<section class="hero">
+  <h1>SHAJU BOT</h1>
+  <p>Next Generation WhatsApp Multi-User Bot Platform</p>
+</section>
 
-  <section class="panel" id="pair">
-    <h2>📱 WhatsApp Pairing</h2>
-    <p>Enter your WhatsApp number to generate your pairing code.</p>
+<section class="card">
+  <h2>📱 Connect Your WhatsApp</h2>
 
-    <div class="input-area">
-      <input
-        id="number"
-        type="tel"
-        inputmode="numeric"
-        maxlength="11"
-        placeholder="01XXXXXXXXX"
-      >
-      <button id="pairBtn" onclick="createPair()">
-        GET PAIRING CODE
-      </button>
-    </div>
+  <input id="number" type="tel"
+    placeholder="01XXXXXXXXX"
+    maxlength="11">
 
-    <div class="codebox">
-      <p>Your Pairing Code</p>
-      <div class="code" id="pairCode">--------</div>
-      <button onclick="copyCode()">COPY CODE</button>
-    </div>
+  <button id="pairBtn" onclick="pairWhatsApp()">
+    Generate Pairing Code
+  </button>
 
-    <div class="status" id="status">
-      🟡 Connection Status: Checking...
-    </div>
+  <div class="code" id="pairCode"></div>
 
-    <p style="margin-top:18px;font-size:13px">
-      Open WhatsApp → Linked Devices → Link a device
-      → Link with phone number.
-    </p>
-  </section>
+  <p class="note">
+    Enter your Bangladesh WhatsApp number.
+    Open WhatsApp → Linked Devices → Link a Device
+    → Link with phone number instead.
+  </p>
+</section>
 
-  <section id="features" style="margin-top:40px">
-    <h2 style="margin-bottom:15px;color:#72f2b2">
-      ⚡ BOT FEATURES
-    </h2>
+<section class="card">
+  <h2>📡 Connection Status</h2>
+  <div class="status">
+    <span class="dot" id="statusDot"></span>
+    <span id="statusText">Checking connection...</span>
+  </div>
+</section>
 
-    <div class="features">
-      <div class="feature">
-        <h3>👋 Welcome Message</h3>
-        <p>Welcome new group members.</p>
-      </div>
-      <div class="feature">
-        <h3>🔗 Anti Link</h3>
-        <p>Protect groups from unwanted links.</p>
-      </div>
-      <div class="feature">
-        <h3>🚫 Anti Spam</h3>
-        <p>Help prevent repeated spam messages.</p>
-      </div>
-      <div class="feature">
-        <h3>🤬 Bad Word Filter</h3>
-        <p>Filter configured inappropriate words.</p>
-      </div>
-      <div class="feature">
-        <h3>⚠️ Warning System</h3>
-        <p>Keep track of group member warnings.</p>
-      </div>
-      <div class="feature">
-        <h3>🛡️ Group Protection</h3>
-        <p>Group moderation tools.</p>
-      </div>
-      <div class="feature">
-        <h3>💬 Auto Reply</h3>
-        <p>Automatic responses to configured messages.</p>
-      </div>
-      <div class="feature">
-        <h3>👑 Admin Control</h3>
-        <p>Tools for authorized group admins.</p>
-      </div>
-    </div>
-  </section>
+<section class="card">
+  <h2>⚙️ Bot Settings</h2>
+
+  <div class="setting">
+    <div><b>Anti-Link</b><small>Control links in groups</small></div>
+    <label class="switch">
+      <input type="checkbox" data-setting="antiLink" onchange="saveSettings()">
+      <span class="track"></span>
+    </label>
+  </div>
+
+  <div class="setting">
+    <div><b>Anti-Spam</b><small>Detect repeated messages</small></div>
+    <label class="switch">
+      <input type="checkbox" data-setting="antiSpam" onchange="saveSettings()">
+      <span class="track"></span>
+    </label>
+  </div>
+
+  <div class="setting">
+    <div><b>Bad Word Filter</b><small>Detect configured bad words</small></div>
+    <label class="switch">
+      <input type="checkbox" data-setting="badWordFilter" onchange="saveSettings()">
+      <span class="track"></span>
+    </label>
+  </div>
+
+  <div class="setting">
+    <div><b>Auto Reply</b><small>Reply to configured messages</small></div>
+    <label class="switch">
+      <input type="checkbox" data-setting="autoReply" onchange="saveSettings()">
+      <span class="track"></span>
+    </label>
+  </div>
+
+  <button style="margin-top:18px" onclick="loadSettings()">
+    Refresh Settings
+  </button>
+
+  <p class="note">
+    Settings are currently stored in server memory.
+    They may reset when the server restarts.
+  </p>
+</section>
 
 </main>
 
-<div class="music">
-  <button onclick="toggleMusic()" id="musicBtn">
-    🎵 Music: OFF
-  </button>
-</div>
-
-<audio id="bgMusic" loop>
-  <source src="/music.mp3" type="audio/mpeg">
-</audio>
-
-<footer>
-  © 2026 SHAJU BOT — All Rights Reserved
-</footer>
+<footer>© 2026 SHAJU BOT | Powered by SHAJU</footer>
+<div class="toast" id="toast"></div>
 
 <script>
-let currentCode = "";
+const $ = id => document.getElementById(id);
 
-async function createPair(){
-  const input = document.getElementById("number");
-  const button = document.getElementById("pairBtn");
-  const local = input.value.replace(/\D/g,"");
+function notify(message){
+  const box=$("toast");
+  box.textContent=message;
+  box.style.display="block";
+  setTimeout(()=>box.style.display="none",3000);
+}
 
-  if(!/^01[3-9]\d{8}$/.test(local)){
-    alert("Enter a valid Bangladesh number.");
+async function pairWhatsApp(){
+  const btn=$("pairBtn");
+  let number=$("number").value.replace(/\D/g,"");
+
+  if(/^01[3-9]\d{8}$/.test(number)){
+    number="88"+number;
+  }
+
+  if(!/^8801[3-9]\d{8}$/.test(number)){
+    notify("Please enter a valid Bangladesh number.");
     return;
   }
 
-  button.disabled = true;
-  button.textContent = "PLEASE WAIT...";
-  document.getElementById("pairCode").textContent = "Loading...";
+  btn.disabled=true;
+  btn.textContent="Generating...";
 
   try{
-    const response = await fetch("/api/pair",{
+    const response=await fetch("/api/pair",{
       method:"POST",
-      credentials:"include",
       headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({number:"88"+local})
+      body:JSON.stringify({number})
     });
 
-    const data = await response.json();
+    const data=await response.json();
 
     if(!response.ok || !data.success){
-      throw new Error(data.message || "Pairing failed");
+      throw new Error(data.message||"Pairing failed");
     }
 
-    currentCode = data.pairingCode;
-    document.getElementById("pairCode").textContent = currentCode;
+    $("pairCode").style.display="block";
+    $("pairCode").textContent=data.pairingCode;
+    notify("Pairing code generated!");
 
   }catch(error){
-    document.getElementById("pairCode").textContent = "--------";
-    alert(error.message);
+    notify(error.message);
   }finally{
-    button.disabled = false;
-    button.textContent = "GET PAIRING CODE";
+    btn.disabled=false;
+    btn.textContent="Generate Pairing Code";
   }
 }
 
-async function copyCode(){
-  if(!currentCode){
-    alert("Generate a pairing code first.");
-    return;
-  }
-
+async function checkStatus(){
   try{
-    await navigator.clipboard.writeText(currentCode);
-    alert("Pairing code copied!");
+    const response=await fetch("/api/status");
+    const data=await response.json();
+
+    $("statusDot").className=
+      data.connected?"dot on":"dot";
+
+    $("statusText").textContent=
+      data.connected?"WhatsApp Connected":
+      "Status: "+data.status;
+
   }catch{
-    alert("Please copy the code manually.");
+    $("statusText").textContent="Server unavailable";
+    $("statusDot").className="dot";
   }
 }
 
-async function updateStatus(){
+async function loadSettings(){
   try{
-    const response = await fetch("/api/status",{
-      credentials:"include"
+    const response=await fetch("/api/settings");
+    const data=await response.json();
+
+    if(!data.success) throw new Error("Could not load settings");
+
+    document.querySelectorAll("[data-setting]").forEach(input=>{
+      const key=input.dataset.setting;
+      input.checked=!!data.settings[key];
     });
-    const data = await response.json();
 
-    document.getElementById("status").textContent =
-      data.connected
-      ? "🟢 Connection Status: Connected"
-      : "🟡 Connection Status: " + data.status;
-
-  }catch{
-    document.getElementById("status").textContent =
-      "🔴 Connection Status: Unavailable";
+    notify("Settings loaded");
+  }catch(error){
+    notify(error.message);
   }
 }
 
-updateStatus();
-setInterval(updateStatus,10000);
+async function saveSettings(){
+  const settings={};
 
-async function toggleMusic(){
-  const music = document.getElementById("bgMusic");
-  const button = document.getElementById("musicBtn");
+  document.querySelectorAll("[data-setting]").forEach(input=>{
+    settings[input.dataset.setting]=input.checked;
+  });
 
-  if(music.paused){
-    try{
-      await music.play();
-      button.textContent = "🎵 Music: ON";
-    }catch{
-      alert("Add a music.mp3 file to the public folder first.");
+  try{
+    const response=await fetch("/api/settings",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(settings)
+    });
+
+    const data=await response.json();
+
+    if(!response.ok || !data.success){
+      throw new Error("Settings could not be saved");
     }
-  }else{
-    music.pause();
-    button.textContent = "🎵 Music: OFF";
+
+    notify("Settings saved!");
+  }catch(error){
+    notify(error.message);
+    loadSettings();
   }
 }
+
+loadSettings();
+checkStatus();
+setInterval(checkStatus,5000);
 </script>
 
 </body>
