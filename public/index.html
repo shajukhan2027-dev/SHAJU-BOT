@@ -3,68 +3,99 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SHAJU-BOT 💖 - Pair Your Bot</title>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Great+Vibes&display=swap" rel="stylesheet">
+<title>SHAJU-BOT - Pair Your Bot</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Baloo 2',Arial,sans-serif;background:#ffc9dd;color:#7a2a4d;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
-.top{max-width:520px;margin:auto;padding:22px 16px 0;text-align:center}
-.crown{font-size:38px}
-.top h1{font-size:48px;color:#f91a7e;letter-spacing:1px;text-shadow:2px 2px 0 #fff}
-.script{font-family:'Great Vibes',cursive;font-size:42px;color:#b3125e;margin-top:4px}
-.top p{font-size:17px;color:#9a4a6d;margin-top:6px}
-.pill{display:flex;justify-content:center;gap:14px;background:#ffb3d0;color:#c40066;font-weight:800;font-size:13px;padding:11px;border-radius:30px;margin:16px 0}
-.hero-img{position:relative;width:240px;height:240px;margin:10px auto}
-.hero-img img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:7px solid #fff;box-shadow:0 12px 30px #ff2e8a55}
-.bow{position:absolute;left:-18px;top:12px;font-size:52px;transform:rotate(-20deg)}
-.heart{position:absolute;right:-5px;bottom:18px;font-size:52px}
-.card{max-width:520px;margin:18px auto;background:#fff;border-radius:26px;padding:24px;position:relative;box-shadow:0 10px 30px #ff2e8a22}
-.card:before,.card:after{content:"🎀";position:absolute;top:-14px;font-size:26px}
-.card:before{left:8px}.card:after{right:8px}
-.card h2{font-size:28px;color:#f91a7e;text-align:center}
-.card .sub{font-size:17px;color:#9a4a6d;text-align:center;margin:8px 0 16px;line-height:1.4}
+body{font-family:'Baloo 2',Arial,sans-serif;background:#ffd3e2;overflow-x:hidden;color:#7a2a4d}
+a{text-decoration:none;color:inherit}
+
+/* ===== TOP HEADER - EXACT LIKE SCREENSHOT ===== */
+.topbar{max-width:520px;margin:auto;padding:18px 16px 0;display:flex;align-items:center;gap:10px}
+.topbar .bow-icon{font-size:48px;line-height:1;transform:rotate(-5deg)}
+.topbar h1{font-size:30px;color:#f91a7e;letter-spacing:.5px;line-height:1}
+.topbar p{font-size:15px;color:#a05a7d;margin-top:3px;white-space:nowrap}
+.telegram-row{max-width:520px;margin:auto;padding:14px 16px 0;display:flex;justify-content:flex-end}
+.tg{ background:#fff;color:#f91a7e;font-weight:800;font-size:21px;padding:13px 26px;border-radius:40px;box-shadow:0 5px 15px #ff2e8a22;display:flex;align-items:center;gap:8px}
+
+/* ===== NAVBAR - EXACT ===== */
+.nav{max-width:520px;margin:14px auto 0;background:#fff;border-radius:40px;padding:6px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 8px 20px #ff2e8a22;margin-left:16px;margin-right:16px}
+.nav a{font-size:20px;font-weight:700;color:#7a2a4d;padding:14px 10px;text-align:center;flex:1}
+.nav a.active{background:#f91a7e;color:#fff;border-radius:50%;width:78px;height:78px;display:flex;align-items:center;justify-content:center;flex:none;font-size:20px}
+.nav a.two{line-height:1.1}
+
+/* ===== HERO - EXACT ===== */
+.hero{max-width:520px;margin:auto;text-align:center;padding:22px 16px 0;position:relative}
+.crown{font-size:48px;line-height:1;margin-bottom:-6px}
+.hero h2{font-size:56px;color:#f91a7e;letter-spacing:1px;text-shadow:3px 3px 0 #fff;line-height:1}
+.script{font-family:'Great Vibes',cursive;font-size:52px;color:#b3125e;margin-top:6px;line-height:1}
+.hero p{font-size:22px;color:#a05a7d;margin-top:10px;line-height:1.3}
+.pill{margin:18px 0;background:#ffc2d8;color:#d81a78;font-weight:800;font-size:18px;padding:13px;border-radius:30px;display:flex;justify-content:center;gap:18px}
+.hero-img{position:relative;width:290px;height:290px;margin:8px auto 0}
+.hero-img img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:8px solid #fff;box-shadow:0 10px 25px #ff2e8a33}
+.bow2{position:absolute;left:-28px;top:5px;font-size:70px;transform:rotate(-25deg);z-index:2}
+.heart2{position:absolute;right:-12px;bottom:18px;font-size:68px;z-index:2}
+
+/* ===== CARD ===== */
+.card{max-width:520px;margin:0 auto;background:#fff;border-radius:28px 28px 0 0;padding:22px;position:relative;margin-top:18px}
+.card:before,.card:after{content:"🎀";position:absolute;top:-10px;font-size:28px}
+.card:before{left:6px}.card:after{right:6px}
+.card h3{font-size:28px;color:#f91a7e;text-align:center}
+.card .sub{font-size:18px;color:#9a4a6d;text-align:center;margin:8px 0 16px;line-height:1.4}
 .input-wrap{display:flex;align-items:center;gap:10px;border:2px solid #ffc2dd;border-radius:16px;padding:6px 12px}
-.input-wrap span{width:44px;height:44px;background:#e6ffe9;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
-.input-wrap input{border:0;outline:none;width:100%;font-family:inherit;font-size:18px;font-weight:700;color:#333}
+.input-wrap span{width:46px;height:46px;background:#e6ffe9;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px}
+.input-wrap input{border:0;outline:none;width:100%;font-family:inherit;font-size:18px;font-weight:700}
 .example{font-size:14px;color:#9a4a6d;margin:10px 0 0 6px}
 .btn{width:100%;border:0;background:linear-gradient(180deg,#ff6fb3,#ff2e8a);color:#fff;font-family:inherit;font-size:22px;font-weight:800;padding:16px;border-radius:16px;margin-top:16px;box-shadow:0 6px 0 #c40066;cursor:pointer}
-.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #c40066}
 .steps{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
-.step{background:#fff;text-align:center;padding:16px 8px;border-radius:14px}
+.step{background:#fff;text-align:center;padding:16px 8px}
 .step b{display:inline-flex;width:42px;height:42px;background:#f91a7e;color:#fff;border-radius:50%;align-items:center;justify-content:center;font-size:18px}
 .step p{margin-top:10px;color:#9a4a6d;font-size:16px}
-.pair-box{max-width:520px;margin:18px auto;background:#fff;border-radius:26px;padding:22px}
-.pair-box h3{color:#e91e7a;font-size:19px}
+.pair-box{max-width:520px;margin:0 auto;background:#fff;padding:0 22px 22px}
 .code{display:none;margin-top:14px;padding:16px;text-align:center;background:#fff0f6;border:2px dashed #ff2e8a;border-radius:14px;color:#ff2e8a;font-size:30px;letter-spacing:7px;font-weight:800}
-.about h2{text-align:left;font-size:30px}.about p{font-size:19px;line-height:1.5;color:#9a4a6d;margin:12px 0 16px}
-.cmd{background:#fff0f6;border-radius:14px;padding:16px;margin-bottom:12px}.cmd b{color:#d81a78;font-size:19px}.cmd p{margin:4px 0 0;color:#9a4a6d;font-size:17px}
+.about{max-width:520px;margin:18px auto;background:#fff;border-radius:26px;padding:24px}
+.about h2{font-size:30px;color:#f91a7e}.about p{font-size:19px;line-height:1.5;color:#9a4a6d;margin:12px 0 16px}
+.cmd{background:#fff0f6;border-radius:14px;padding:16px;margin-bottom:12px}.cmd b{color:#d81a78;font-size:19px}.cmd p{margin:4px 0 0;font-size:17px}
 .footer{text-align:center;padding:10px 16px 30px;max-width:520px;margin:auto}
-.footer h3{font-size:19px;color:#d81a78;margin:18px 0 10px}
-.footer a{display:block;font-size:19px;color:#7a2a4d;padding:5px}
-.footer .big{font-size:38px;color:#f91a7e;font-weight:800;margin-top:22px}
-.footer .script{font-size:34px}.footer .small{font-size:15px;color:#9a4a6d;margin-top:10px}.copy{font-size:15px;color:#9a4a6d;margin-top:18px}
+.footer h3{font-size:19px;color:#d81a78;margin:18px 0 10px}.footer a{display:block;font-size:19px;color:#7a2a4d;padding:5px}
+.footer .big{font-size:38px;color:#f91a7e;font-weight:800;margin-top:22px}.footer .script{font-size:34px}
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#4a1a32;color:#fff;padding:13px 20px;border-radius:14px;display:none;z-index:99;max-width:90%;text-align:center;font-weight:700}
-.status{display:flex;align-items:center;gap:10px;font-weight:700;margin-top:12px}
-.dot{width:12px;height:12px;border-radius:50%;background:#ffb02e}.dot.on{background:#2ecc71}
+.status{display:flex;align-items:center;gap:10px;font-weight:700;margin-top:12px}.dot{width:12px;height:12px;border-radius:50%;background:#ffb02e}.dot.on{background:#2ecc71}
 .setting{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1.5px solid #ffe0ee}.setting small{color:#aaa}
 .switch{position:relative;width:52px;height:29px}.switch input{display:none}.track{position:absolute;inset:0;background:#e8e8e8;border-radius:30px}.track:before{content:"";position:absolute;width:21px;height:21px;left:4px;top:4px;border-radius:50%;background:#fff;transition:.3s}.switch input:checked+.track{background:#ff2e8a}.switch input:checked+.track:before{transform:translateX(23px)}
-.tg-btn{display:inline-block;background:#229ED9;color:#fff!important;font-weight:800;padding:12px 22px;border-radius:30px;margin-top:8px}
 </style>
 </head>
 <body>
-<div class="top">
+
+<!-- TOP - HUBAHU -->
+<div class="topbar">
+  <div class="bow-icon">🎀</div>
+  <div><h1>SHAJU-BOT</h1><p>WhatsApp Bot • Telegram Group Pair</p></div>
+</div>
+
+<div class="telegram-row"><a class="tg" href="https://t.me/shajubhaijan10" target="_blank">✈️ Telegram</a></div>
+
+<!-- NAVBAR - HUBAHU -->
+<div class="nav">
+  <a href="#" class="active">Home</a>
+  <a href="#pair" class="two">Pair<br>Code</a>
+  <a href="#about">About</a>
+  <a href="https://t.me/shajubhaijan10" target="_blank">Contact</a>
+</div>
+
+<!-- HERO - HUBAHU -->
+<div class="hero">
   <div class="crown">👑</div>
-  <h1>SHAJU-BOT</h1>
+  <h2>SHAJU-BOT</h2>
   <div class="script">Pair Your Bot</div>
   <p>Get your WhatsApp pair code easily<br>from here</p>
   <div class="pill"><span>Your Bot</span><span>Your Control</span><span>Always Online</span></div>
-  <div class="hero-img"><span class="bow">🎀</span><img src="shaju.jpg" alt="SHAJU"><span class="heart">💖</span></div>
-  <a class="tg-btn" href="https://t.me/shajubhaijan10" target="_blank">💬 @shajubhaijan10 on Telegram</a>
+  <div class="hero-img"><span class="bow2">🎀</span><img src="shaju.jpg" alt="SHAJU"><span class="heart2">💖</span></div>
 </div>
 
-<div class="card">
-  <h2>Get Your Pair Code</h2>
+<!-- PAIR CARD -->
+<div class="card" id="pair">
+  <h3>Get Your Pair Code</h3>
   <p class="sub">Enter your WhatsApp number with<br>country code</p>
   <div class="input-wrap"><span>💬</span><input id="number" type="tel" placeholder="Enter your WhatsApp num"></div>
   <p class="example">Example: +8801712345678</p>
@@ -76,22 +107,21 @@ a{color:inherit;text-decoration:none}
     <div class="step"><b>4</b><p>Type the code</p></div>
   </div>
 </div>
-
 <div class="pair-box">
-  <h3>♡ &nbsp; Pairing Code</h3>
+  <h3 style="color:#e91e7a">♡ Pairing Code</h3>
   <div class="code" id="pairCode"></div>
   <div class="status"><span class="dot" id="statusDot"></span><span id="statusText">Checking connection...</span></div>
   <p class="example" style="text-align:center">Open WhatsApp → Linked Devices → Link a Device → Link with phone number instead 💕</p>
 </div>
 
-<div class="card about">
+<div class="about" id="about">
   <h2>About</h2>
   <p>SHAJU-BOT is a multi-session WhatsApp bot. Pair your number here, or send <b>/pair 8801XXXXXXXXX</b> in the official Telegram group, and the bot starts working on your WhatsApp.</p>
   <div class="cmd"><b>.menu</b><p>Show all commands</p></div>
   <div class="cmd"><b>.ping</b><p>Check bot speed</p></div>
   <div class="cmd"><b>.alive</b><p>Bot status</p></div>
   <div class="cmd"><b>.sticker</b><p>Image to sticker</p></div>
-  <h2 style="margin-top:18px;font-size:20px">⚙️ Bot Settings 🎀</h2>
+  <h2 style="font-size:20px;margin-top:18px">⚙️ Bot Settings 🎀</h2>
   <div class="setting"><div><b>Anti-Link</b><br><small>Control links in groups</small></div><label class="switch"><input type="checkbox" data-setting="antiLink" onchange="saveSettings()"><span class="track"></span></label></div>
   <div class="setting"><div><b>Anti-Spam</b><br><small>Detect repeated messages</small></div><label class="switch"><input type="checkbox" data-setting="antiSpam" onchange="saveSettings()"><span class="track"></span></label></div>
   <div class="setting"><div><b>Bad Word Filter</b><br><small>Detect configured bad words</small></div><label class="switch"><input type="checkbox" data-setting="badWordFilter" onchange="saveSettings()"><span class="track"></span></label></div>
@@ -100,15 +130,15 @@ a{color:inherit;text-decoration:none}
 
 <div class="footer">
   <h3>Quick Links</h3>
-  <a href="#">Home</a><a href="#">Pair Code</a><a href="#">About</a><a href="https://t.me/shajubhaijan10" target="_blank">Contact</a>
+  <a href="#">Home</a><a href="#pair">Pair Code</a><a href="#about">About</a><a href="https://t.me/shajubhaijan10" target="_blank">Contact</a>
   <div class="big">SHAJU-BOT</div>
   <div class="script">A Premium WhatsApp Bot</div>
   <p style="font-size:17px">Made with love by SHAJU</p>
   <h3>Follow Us</h3>
   <a href="https://t.me/shajubhaijan10" target="_blank">Owner on Telegram - @shajubhaijan10</a>
   <a href="https://t.me/shajubhaijan10" target="_blank"><b>Telegram pair bot - @shajubhaijan10</b></a>
-  <p class="small">Stay connected for updates and support</p>
-  <p class="copy">© 2026 SHAJU-BOT • All Rights Reserved</p>
+  <p style="font-size:15px;color:#9a4a6d;margin-top:10px">Stay connected for updates and support</p>
+  <p style="font-size:15px;color:#9a4a6d;margin-top:18px">© 2026 SHAJU-BOT • All Rights Reserved</p>
 </div>
 
 <div class="toast" id="toast"></div>
