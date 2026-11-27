@@ -3,68 +3,98 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SHAJU-BOT - Pair Your Bot</title>
+<title>SHAJU-BOT 💖</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Baloo 2',Arial,sans-serif;background:#ffd3e2;overflow-x:hidden;color:#7a2a4d}
+body{font-family:'Baloo 2',Arial,sans-serif;background:linear-gradient(180deg,#ffe0ee,#ffc9dd,#ffb3d0);overflow-x:hidden;color:#7a2a4d;min-height:100vh}
 a{text-decoration:none;color:inherit}
-.topbar{max-width:520px;margin:auto;padding:18px 16px 0;display:flex;align-items:center;gap:10px}
-.topbar .bow-icon{font-size:48px;line-height:1}
-.topbar h1{font-size:30px;color:#f91a7e;letter-spacing:.5px;line-height:1}
-.topbar p{font-size:15px;color:#a05a7d;margin-top:3px;white-space:nowrap}
-.telegram-row{max-width:520px;margin:auto;padding:14px 16px 0;display:flex;justify-content:flex-end}
-.tg{background:#fff;color:#f91a7e;font-weight:800;font-size:21px;padding:13px 26px;border-radius:40px;box-shadow:0 5px 15px #ff2e8a22;display:flex;align-items:center;gap:10px}
-.tg svg{width:26px;height:26px}
-.nav{max-width:520px;margin:14px auto 0;background:#fff;border-radius:40px;padding:6px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 8px 20px #ff2e8a22;margin-left:16px;margin-right:16px}
-.nav a{font-size:20px;font-weight:700;color:#7a2a4d;padding:14px 10px;text-align:center;flex:1}
-.nav a.active{background:#f91a7e;color:#fff;border-radius:50%;width:78px;height:78px;display:flex;align-items:center;justify-content:center;flex:none}
+
+/* ===== LIVE FLOATING HEARTS ===== */
+.hearts{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.hearts span{position:absolute;bottom:-30px;animation:floatUp 5s linear infinite;opacity:.8}
+.hearts span:nth-child(1){left:5%;font-size:16px;animation-delay:0s}
+.hearts span:nth-child(2){left:18%;font-size:20px;animation-delay:1s}
+.hearts span:nth-child(3){left:38%;font-size:14px;animation-delay:2s}
+.hearts span:nth-child(4){left:58%;font-size:22px;animation-delay:.5s}
+.hearts span:nth-child(5){left:78%;font-size:16px;animation-delay:1.5s}
+.hearts span:nth-child(6){left:90%;font-size:18px;animation-delay:2.5s}
+@keyframes floatUp{0%{transform:translateY(0) rotate(0deg);opacity:0}10%{opacity:.9}100%{transform:translateY(-110vh) rotate(40deg);opacity:0}}
+
+/* ===== TOP - SMALLER + CUTE ===== */
+.topbar{position:relative;z-index:2;max-width:440px;margin:auto;padding:12px 14px 0;display:flex;align-items:center;gap:8px}
+.topbar .bow-icon{font-size:32px;animation:wiggle 2s ease-in-out infinite}
+@keyframes wiggle{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+.topbar h1{font-size:22px;color:#f91a7e;line-height:1}
+.topbar p{font-size:11px;color:#a05a7d;margin-top:2px}
+.telegram-row{position:relative;z-index:2;max-width:440px;margin:auto;padding:10px 14px 0;display:flex;justify-content:flex-end}
+.tg{background:#fff;color:#f91a7e;font-weight:800;font-size:14px;padding:8px 16px;border-radius:30px;box-shadow:0 4px 12px #ff2e8a33;display:flex;align-items:center;gap:6px;animation:pulse 2s infinite}
+.tg svg{width:18px;height:18px}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+
+/* ===== NAV - SMALLER ===== */
+.nav{position:relative;z-index:2;max-width:440px;margin:10px auto 0;background:#fff;border-radius:30px;padding:4px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 6px 15px #ff2e8a22;margin-left:14px;margin-right:14px}
+.nav a{font-size:14px;font-weight:700;color:#7a2a4d;padding:8px 6px;text-align:center;flex:1}
+.nav a.active{background:#f91a7e;color:#fff;border-radius:50%;width:52px;height:52px;display:flex;align-items:center;justify-content:center;flex:none}
 .nav a.two{line-height:1.1}
-.hero{max-width:520px;margin:auto;text-align:center;padding:22px 16px 0}
-.crown{font-size:48px}
-.hero h2{font-size:56px;color:#f91a7e;letter-spacing:1px;text-shadow:3px 3px 0 #fff;line-height:1}
-.script{font-family:'Great Vibes',cursive;font-size:52px;color:#b3125e;margin-top:6px;line-height:1}
-.hero p{font-size:22px;color:#a05a7d;margin-top:10px;line-height:1.3}
-.pill{margin:18px 0;background:#ffc2d8;color:#d81a78;font-weight:800;font-size:18px;padding:13px;border-radius:30px;display:flex;justify-content:center;gap:18px}
-.hero-img{position:relative;width:290px;height:290px;margin:8px auto 0}
-.hero-img img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:8px solid #fff;box-shadow:0 10px 25px #ff2e8a33}
-.bow2{position:absolute;left:-28px;top:5px;font-size:70px;transform:rotate(-25deg);z-index:2}
-.heart2{position:absolute;right:-12px;bottom:18px;font-size:68px;z-index:2}
-.card{max-width:520px;margin:0 auto;background:#fff;border-radius:28px 28px 0 0;padding:22px;position:relative;margin-top:18px}
-.card:before,.card:after{content:"🎀";position:absolute;top:-10px;font-size:28px}
+
+/* ===== HERO - SMALLER + CUTE ===== */
+.hero{position:relative;z-index:2;max-width:440px;margin:auto;text-align:center;padding:12px 14px 0}
+.crown{font-size:28px;animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.hero h2{font-size:36px;color:#f91a7e;text-shadow:2px 2px 0 #fff;line-height:1}
+.script{font-family:'Great Vibes',cursive;font-size:32px;color:#b3125e;margin-top:2px;line-height:1}
+.hero p{font-size:14px;color:#a05a7d;margin-top:6px;line-height:1.3}
+.pill{margin:12px 0;background:#ffc2d8;color:#d81a78;font-weight:800;font-size:12px;padding:8px;border-radius:20px;display:flex;justify-content:center;gap:12px}
+.hero-img{position:relative;width:170px;height:170px;margin:6px auto 0;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.hero-img img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:5px solid #fff;box-shadow:0 8px 20px #ff2e8a44}
+.bow2{position:absolute;left:-16px;top:2px;font-size:38px;transform:rotate(-25deg);z-index:2;animation:wiggle 2s infinite}
+.heart2{position:absolute;right:-8px;bottom:10px;font-size:36px;z-index:2;animation:heartBeat 1.5s infinite}
+@keyframes heartBeat{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
+
+/* ===== CARD - SMALLER ===== */
+.card{position:relative;z-index:2;max-width:440px;margin:0 auto;background:#fff;border-radius:22px 22px 0 0;padding:16px;margin-top:12px}
+.card:before,.card:after{content:"🎀";position:absolute;top:-8px;font-size:18px}
 .card:before{left:6px}.card:after{right:6px}
-.card h3{font-size:28px;color:#f91a7e;text-align:center}
-.card .sub{font-size:18px;color:#9a4a6d;text-align:center;margin:8px 0 16px;line-height:1.4}
-.input-wrap{display:flex;align-items:center;gap:10px;border:2px solid #ffc2dd;border-radius:16px;padding:6px 12px}
-.input-wrap .wa{width:46px;height:46px;background:#e6ffe9;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.input-wrap .wa svg{width:28px;height:28px}
-.input-wrap input{border:0;outline:none;width:100%;font-family:inherit;font-size:18px;font-weight:700}
-.example{font-size:14px;color:#9a4a6d;margin:10px 0 0 6px}
-.btn{width:100%;border:0;background:linear-gradient(180deg,#ff6fb3,#ff2e8a);color:#fff;font-family:inherit;font-size:22px;font-weight:800;padding:16px;border-radius:16px;margin-top:16px;box-shadow:0 6px 0 #c40066;cursor:pointer}
-.steps{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
-.step{background:#fff;text-align:center;padding:16px 8px}
-.step b{display:inline-flex;width:42px;height:42px;background:#f91a7e;color:#fff;border-radius:50%;align-items:center;justify-content:center;font-size:18px}
-.step p{margin-top:10px;color:#9a4a6d;font-size:16px}
-.pair-box{max-width:520px;margin:0 auto;background:#fff;padding:0 22px 22px}
-.code{display:none;margin-top:14px;padding:16px;text-align:center;background:#fff0f6;border:2px dashed #ff2e8a;border-radius:14px;color:#ff2e8a;font-size:30px;letter-spacing:7px;font-weight:800}
-.about{max-width:520px;margin:18px auto;background:#fff;border-radius:26px;padding:24px}
-.about h2{font-size:30px;color:#f91a7e}.about p{font-size:19px;line-height:1.5;color:#9a4a6d;margin:12px 0 16px}
-.cmd{background:#fff0f6;border-radius:14px;padding:16px;margin-bottom:12px}.cmd b{color:#d81a78;font-size:19px}.cmd p{margin:4px 0 0;font-size:17px}
-.footer{text-align:center;padding:10px 16px 30px;max-width:520px;margin:auto}
-.footer h3{font-size:19px;color:#d81a78;margin:18px 0 10px}.footer a{display:block;font-size:19px;color:#7a2a4d;padding:5px}
-.footer .big{font-size:38px;color:#f91a7e;font-weight:800;margin-top:22px}.footer .script{font-size:34px}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#4a1a32;color:#fff;padding:13px 20px;border-radius:14px;display:none;z-index:99;max-width:90%;text-align:center;font-weight:700}
-.status{display:flex;align-items:center;gap:10px;font-weight:700;margin-top:12px}.dot{width:12px;height:12px;border-radius:50%;background:#ffb02e}.dot.on{background:#2ecc71}
+.card h3{font-size:20px;color:#f91a7e;text-align:center}
+.card .sub{font-size:13px;color:#9a4a6d;text-align:center;margin:5px 0 10px;line-height:1.4}
+.input-wrap{display:flex;align-items:center;gap:8px;border:2px solid #ffc2dd;border-radius:14px;padding:4px 10px}
+.input-wrap .wa{width:34px;height:34px;background:#e6ffe9;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.input-wrap .wa svg{width:20px;height:20px}
+.input-wrap input{border:0;outline:none;width:100%;font-family:inherit;font-size:14px;font-weight:700}
+.example{font-size:11px;color:#9a4a6d;margin:7px 0 0 5px}
+.btn{width:100%;border:0;background:linear-gradient(180deg,#ff6fb3,#ff2e8a);color:#fff;font-family:inherit;font-size:16px;font-weight:800;padding:12px;border-radius:14px;margin-top:12px;box-shadow:0 4px 0 #c40066;cursor:pointer;animation:glow 2s infinite}
+@keyframes glow{0%,100%{box-shadow:0 4px 0 #c40066}50%{box-shadow:0 4px 0 #c40066,0 0 18px #ff2e8a}}
+.btn:active{transform:translateY(2px)}
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.step{background:#fff;text-align:center;padding:10px 6px}
+.step b{display:inline-flex;width:30px;height:30px;background:#f91a7e;color:#fff;border-radius:50%;align-items:center;justify-content:center;font-size:13px}
+.step p{margin-top:6px;color:#9a4a6d;font-size:12px}
+.pair-box{position:relative;z-index:2;max-width:440px;margin:0 auto;background:#fff;padding:0 16px 16px}
+.code{display:none;margin-top:10px;padding:12px;text-align:center;background:#fff0f6;border:2px dashed #ff2e8a;border-radius:12px;color:#ff2e8a;font-size:22px;letter-spacing:5px;font-weight:800;animation:pop .4s}
+@keyframes pop{0%{transform:scale(.8)}100%{transform:scale(1)}}
+.about{position:relative;z-index:2;max-width:440px;margin:12px auto;background:#fff;border-radius:20px;padding:16px}
+.about h2{font-size:20px;color:#f91a7e}.about p{font-size:13px;line-height:1.5;color:#9a4a6d;margin:8px 0 12px}
+.cmd{background:#fff0f6;border-radius:12px;padding:10px;margin-bottom:8px}.cmd b{color:#d81a78;font-size:14px}.cmd p{margin:2px 0 0;font-size:12px}
+.footer{position:relative;z-index:2;text-align:center;padding:8px 14px 22px;max-width:440px;margin:auto}
+.footer h3{font-size:14px;color:#d81a78;margin:12px 0 6px}.footer a{display:block;font-size:13px;color:#7a2a4d;padding:3px}
+.footer .big{font-size:26px;color:#f91a7e;font-weight:800;margin-top:14px}.footer .script{font-size:24px}
+.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#4a1a32;color:#fff;padding:10px 16px;border-radius:12px;display:none;z-index:99;max-width:90%;text-align:center;font-weight:700;font-size:13px}
+.status{display:flex;align-items:center;gap:8px;font-weight:700;margin-top:10px;font-size:12px}.dot{width:9px;height:9px;border-radius:50%;background:#ffb02e}.dot.on{background:#2ecc71;box-shadow:0 0 8px #2ecc71}
+.sparkle{position:fixed;pointer-events:none;z-index:1;font-size:14px;animation:spark 3s infinite}
+@keyframes spark{0%,100%{opacity:.2;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
 </style>
 </head>
 <body>
+<div class="hearts"><span>💖</span><span>🎀</span><span>✨</span><span>💗</span><span>💖</span><span>🎀</span></div>
+<span class="sparkle" style="top:15%;left:8%">✨</span><span class="sparkle" style="top:25%;right:10%;animation-delay:1s">💖</span><span class="sparkle" style="top:55%;left:5%;animation-delay:2s">🎀</span>
 
 <div class="topbar">
   <div class="bow-icon">🎀</div>
   <div><h1>SHAJU-BOT</h1><p>WhatsApp Bot • Telegram Group Pair</p></div>
 </div>
 
-<!-- ১. বিমান বাদ - TELEGRAM LOGO -->
 <div class="telegram-row">
   <a class="tg" href="https://t.me/shajubhaijan10" target="_blank">
     <svg viewBox="0 0 24 24" fill="#229ED9"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
@@ -91,15 +121,10 @@ a{text-decoration:none;color:inherit}
 <div class="card" id="pair">
   <h3>Get Your Pair Code</h3>
   <p class="sub">Enter your WhatsApp number with<br>country code</p>
-
-  <!-- ২. মেসেজ বাদ - WHATSAPP LOGO -->
   <div class="input-wrap">
-    <span class="wa">
-      <svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-    </span>
+    <span class="wa"><svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg></span>
     <input id="number" type="tel" placeholder="Enter your WhatsApp num">
   </div>
-
   <p class="example">Example: +8801712345678</p>
   <button class="btn" id="pairBtn" onclick="pairWhatsApp()">✦ &nbsp; Get My Pair Code</button>
   <div class="steps">
@@ -111,13 +136,12 @@ a{text-decoration:none;color:inherit}
 </div>
 
 <div class="pair-box">
-  <h3 style="color:#e91e7a">♡ Pairing Code</h3>
+  <h3 style="color:#e91e7a;font-size:15px">♡ Pairing Code</h3>
   <div class="code" id="pairCode"></div>
   <div class="status"><span class="dot" id="statusDot"></span><span id="statusText">Checking connection...</span></div>
   <p class="example" style="text-align:center">Open WhatsApp → Linked Devices → Link a Device → Link with phone number instead 💕</p>
 </div>
 
-<!-- ৩. BOT SETTINGS পুরা বাদ দেওয়া হইছে -->
 <div class="about" id="about">
   <h2>About</h2>
   <p>SHAJU-BOT is a multi-session WhatsApp bot. Pair your number here, or send <b>/pair 8801XXXXXXXXX</b> in the official Telegram group, and the bot starts working on your WhatsApp.</p>
@@ -132,12 +156,12 @@ a{text-decoration:none;color:inherit}
   <a href="#">Home</a><a href="#pair">Pair Code</a><a href="#about">About</a><a href="https://t.me/shajubhaijan10" target="_blank">Contact</a>
   <div class="big">SHAJU-BOT</div>
   <div class="script">A Premium WhatsApp Bot</div>
-  <p style="font-size:17px">Made with love by SHAJU</p>
+  <p style="font-size:12px">Made with love by SHAJU</p>
   <h3>Follow Us</h3>
   <a href="https://t.me/shajubhaijan10" target="_blank">Owner on Telegram - @shajubhaijan10</a>
   <a href="https://t.me/shajubhaijan10" target="_blank"><b>Telegram pair bot - @shajubhaijan10</b></a>
-  <p style="font-size:15px;color:#9a4a6d;margin-top:10px">Stay connected for updates and support</p>
-  <p style="font-size:15px;color:#9a4a6d;margin-top:18px">© 2026 SHAJU-BOT • All Rights Reserved</p>
+  <p style="font-size:11px;color:#9a4a6d;margin-top:8px">Stay connected for updates and support</p>
+  <p style="font-size:11px;color:#9a4a6d;margin-top:12px">© 2026 SHAJU-BOT • All Rights Reserved</p>
 </div>
 
 <div class="toast" id="toast"></div>
