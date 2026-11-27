@@ -1,364 +1,190 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#071411">
-<title>SHAJU BOT - WhatsApp Platform</title>
-
+<meta name="theme-color" content="#ff5ea8">
+<title>SHAJU-BOT - Pair Your WhatsApp</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{
-  font-family:Arial,sans-serif;
-  background:#071411;
-  color:#fff;
+  font-family:'Segoe UI',Arial,sans-serif;
+  background:linear-gradient(180deg,#ffd6e8 0%,#ffc2dd 30%,#ff9ec7 100%);
+  color:#3a1a2e;
   min-height:100vh;
   overflow-x:hidden;
 }
-body:before{
-  content:"";
-  position:fixed;
-  width:350px;height:350px;
-  background:#00ff9950;
-  filter:blur(120px);
-  top:-100px;left:-100px;
-  z-index:-1;
-}
-body:after{
-  content:"";
-  position:fixed;
-  width:350px;height:350px;
-  background:#ff00a640;
-  filter:blur(120px);
-  bottom:-100px;right:-100px;
-  z-index:-1;
-}
 header{
-  padding:22px 7%;
+  padding:18px 7%;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  border-bottom:1px solid #ffffff18;
 }
 .logo{
-  font-size:25px;font-weight:900;
-  background:linear-gradient(90deg,#00ff99,#ff36b5);
-  -webkit-background-clip:text;
-  color:transparent;
+  font-size:22px;font-weight:900;
+  color:#fff;
+  background:#ff2e8a;
+  padding:8px 16px;border-radius:30px;
+  box-shadow:0 5px 15px #ff2e8a55;
 }
 .live{
-  color:#00ff99;
-  font-size:12px;
-  border:1px solid #00ff9960;
+  background:#fff;color:#ff2e8a;
+  font-size:12px;font-weight:700;
   padding:8px 13px;border-radius:30px;
 }
-main{max-width:850px;margin:auto;padding:45px 18px}
-.hero{text-align:center;margin-bottom:35px}
+main{max-width:520px;margin:auto;padding:10px 18px 30px}
+.hero{text-align:center;margin:10px 0 20px}
+.hero .avatar{
+  width:130px;height:130px;border-radius:50%;
+  background:#fff;border:6px solid #fff;
+  margin:auto;overflow:hidden;
+  box-shadow:0 10px 30px #ff2e8a55;
+  display:flex;align-items:center;justify-content:center;
+  font-size:65px;
+}
 .hero h1{
-  font-size:42px;
-  margin-bottom:12px;
-  background:linear-gradient(90deg,#00ff99,#ff36b5);
-  -webkit-background-clip:text;color:transparent;
+  font-size:36px;margin:14px 0 4px;color:#fff;
+  text-shadow:0 2px 10px #ff2e8a;
+  letter-spacing:1px;
 }
-.hero p{color:#aabbb3;line-height:1.7}
+.hero p{color:#fff;font-weight:600;font-size:14px}
 .card{
-  background:#10231dce;
-  border:1px solid #ffffff18;
-  border-radius:18px;
-  padding:23px;
-  margin-bottom:20px;
-  box-shadow:0 10px 35px #0005;
-  backdrop-filter:blur(12px);
+  background:#fff;
+  border-radius:22px;
+  padding:22px;
+  margin-bottom:16px;
+  box-shadow:0 10px 30px #ff2e8a33;
 }
-h2{font-size:19px;margin-bottom:18px}
+h2{font-size:18px;margin-bottom:6px;color:#d81a78}
+.sub{font-size:13px;color:#888;margin-bottom:16px;line-height:1.5}
 input{
   width:100%;padding:15px;
-  background:#071411;border:1px solid #315447;
-  border-radius:10px;color:white;
-  font-size:16px;outline:none;
-  margin-bottom:13px;
+  background:#fff0f6;border:2px solid #ffc2dd;
+  border-radius:14px;color:#333;
+  font-size:16px;outline:none;margin-bottom:12px;
 }
+input:focus{border-color:#ff2e8a}
 button{
-  border:0;border-radius:10px;
-  padding:14px 18px;
-  background:linear-gradient(90deg,#00d982,#00a8a0);
-  color:#06130e;font-weight:bold;
-  cursor:pointer;width:100%;
-  font-size:15px;
+  border:0;border-radius:14px;
+  padding:15px 18px;
+  background:linear-gradient(90deg,#ff2e8a,#ff6fb3);
+  color:#fff;font-weight:800;
+  cursor:pointer;width:100%;font-size:15px;
+  box-shadow:0 8px 20px #ff2e8a55;
 }
-button:disabled{opacity:.5;cursor:wait}
+button:disabled{opacity:.6}
 .code{
-  margin-top:16px;
-  padding:18px;
-  text-align:center;
-  background:#06110d;
-  border:1px dashed #00ff99;
-  border-radius:12px;
-  color:#00ff99;
-  font-size:26px;
-  letter-spacing:5px;
-  display:none;
+  margin-top:16px;padding:18px;text-align:center;
+  background:#fff0f6;border:2px dashed #ff2e8a;
+  border-radius:14px;color:#ff2e8a;
+  font-size:28px;letter-spacing:6px;font-weight:900;display:none;
 }
-.status{
-  display:flex;align-items:center;gap:10px;
-  color:#b9c9c2;font-size:14px;
-}
-.dot{
-  width:10px;height:10px;border-radius:50%;
-  background:#ffb02e;
-  box-shadow:0 0 12px currentColor;
-}
-.dot.on{background:#00ff99}
-.setting{
-  display:flex;justify-content:space-between;
-  align-items:center;gap:12px;
-  padding:15px 0;border-bottom:1px solid #ffffff13;
-}
+.status{display:flex;align-items:center;gap:10px;color:#555;font-size:14px;font-weight:600}
+.dot{width:12px;height:12px;border-radius:50%;background:#ffb02e;box-shadow:0 0 10px #ffb02e}
+.dot.on{background:#00c77b;box-shadow:0 0 10px #00c77b}
+.setting{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid #ffe0ee}
 .setting:last-child{border:0}
-.setting small{display:block;color:#91a69b;margin-top:5px}
-.switch{position:relative;width:48px;height:26px;flex-shrink:0}
+.setting small{display:block;color:#999;margin-top:4px;font-size:12px}
+.switch{position:relative;width:50px;height:28px;flex-shrink:0}
 .switch input{display:none}
-.track{
-  position:absolute;inset:0;
-  background:#43534c;border-radius:30px;cursor:pointer;
-  transition:.3s;
-}
-.track:before{
-  content:"";position:absolute;
-  width:18px;height:18px;left:4px;top:4px;
-  border-radius:50%;background:white;transition:.3s;
-}
-.switch input:checked+.track{background:#00c77b}
+.track{position:absolute;inset:0;background:#ddd;border-radius:30px;cursor:pointer;transition:.3s}
+.track:before{content:"";position:absolute;width:20px;height:20px;left:4px;top:4px;border-radius:50%;background:white;transition:.3s}
+.switch input:checked+.track{background:#ff2e8a}
 .switch input:checked+.track:before{transform:translateX(22px)}
-.note{color:#8ea69a;font-size:12px;line-height:1.6;margin-top:15px}
-footer{text-align:center;padding:25px;color:#789087;font-size:12px}
-.toast{
-  position:fixed;bottom:20px;left:50%;
-  transform:translateX(-50%);
-  background:#17372a;color:#fff;
-  padding:13px 20px;border-radius:10px;
-  display:none;z-index:5;
-  max-width:90%;text-align:center;
-}
-@media(max-width:500px){
-  .hero h1{font-size:33px}
-  header{padding:18px}
-  main{padding-top:30px}
-}
+.steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:10px}
+.step{background:#fff0f6;padding:14px 8px;border-radius:16px;text-align:center}
+.step b{font-size:22px}
+.step p{font-size:11px;color:#666;margin-top:6px;line-height:1.4}
+.note{color:#999;font-size:12px;line-height:1.6;margin-top:14px;text-align:center}
+footer{text-align:center;padding:20px;color:#fff;font-size:12px;font-weight:600}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#3a1a2e;color:#fff;padding:13px 20px;border-radius:12px;display:none;z-index:5;max-width:90%;text-align:center}
 </style>
 </head>
-
 <body>
 
 <header>
-  <div class="logo">🔥 SHAJU BOT</div>
+  <div class="logo">💖 SHAJU-BOT</div>
   <div class="live">● SYSTEM LIVE</div>
 </header>
 
 <main>
-
 <section class="hero">
-  <h1>SHAJU BOT</h1>
-  <p>Next Generation WhatsApp Multi-User Bot Platform</p>
+  <div class="avatar">👑</div>
+  <h1>SHAJU-BOT</h1>
+  <p>✨ Your Cute WhatsApp Bot ✨</p>
 </section>
 
 <section class="card">
-  <h2>📱 Connect Your WhatsApp</h2>
-
-  <input id="number" type="tel"
-    placeholder="01XXXXXXXXX"
-    maxlength="11">
-
-  <button id="pairBtn" onclick="pairWhatsApp()">
-    Generate Pairing Code
-  </button>
-
+  <h2>💖 Pair Your WhatsApp</h2>
+  <p class="sub">Enter your WhatsApp number to get your pairing code instantly.</p>
+  <input id="number" type="tel" placeholder="+880 01XXXXXXXXX" maxlength="14">
+  <button id="pairBtn" onclick="pairWhatsApp()">💌 Get Code</button>
   <div class="code" id="pairCode"></div>
-
-  <p class="note">
-    Enter your Bangladesh WhatsApp number.
-    Open WhatsApp → Linked Devices → Link a Device
-    → Link with phone number instead.
-  </p>
+  <p class="note">Enter your Bangladesh WhatsApp number.<br>Open WhatsApp → Linked Devices → Link a Device → Link with phone number instead.</p>
 </section>
 
 <section class="card">
   <h2>📡 Connection Status</h2>
-  <div class="status">
-    <span class="dot" id="statusDot"></span>
-    <span id="statusText">Checking connection...</span>
-  </div>
+  <p class="sub">Live status of your bot</p>
+  <div class="status"><span class="dot" id="statusDot"></span><span id="statusText">Checking connection...</span></div>
 </section>
 
 <section class="card">
   <h2>⚙️ Bot Settings</h2>
-
-  <div class="setting">
-    <div><b>Anti-Link</b><small>Control links in groups</small></div>
-    <label class="switch">
-      <input type="checkbox" data-setting="antiLink" onchange="saveSettings()">
-      <span class="track"></span>
-    </label>
-  </div>
-
-  <div class="setting">
-    <div><b>Anti-Spam</b><small>Detect repeated messages</small></div>
-    <label class="switch">
-      <input type="checkbox" data-setting="antiSpam" onchange="saveSettings()">
-      <span class="track"></span>
-    </label>
-  </div>
-
-  <div class="setting">
-    <div><b>Bad Word Filter</b><small>Detect configured bad words</small></div>
-    <label class="switch">
-      <input type="checkbox" data-setting="badWordFilter" onchange="saveSettings()">
-      <span class="track"></span>
-    </label>
-  </div>
-
-  <div class="setting">
-    <div><b>Auto Reply</b><small>Reply to configured messages</small></div>
-    <label class="switch">
-      <input type="checkbox" data-setting="autoReply" onchange="saveSettings()">
-      <span class="track"></span>
-    </label>
-  </div>
-
-  <button style="margin-top:18px" onclick="loadSettings()">
-    Refresh Settings
-  </button>
-
-  <p class="note">
-    Settings are currently stored in server memory.
-    They may reset when the server restarts.
-  </p>
+  <p class="sub">Control your SHAJU-BOT features</p>
+  <div class="setting"><div><b>Anti-Link</b><small>Control links in groups</small></div><label class="switch"><input type="checkbox" data-setting="antiLink" onchange="saveSettings()"><span class="track"></span></label></div>
+  <div class="setting"><div><b>Anti-Spam</b><small>Detect repeated messages</small></div><label class="switch"><input type="checkbox" data-setting="antiSpam" onchange="saveSettings()"><span class="track"></span></label></div>
+  <div class="setting"><div><b>Bad Word Filter</b><small>Detect configured bad words</small></div><label class="switch"><input type="checkbox" data-setting="badWordFilter" onchange="saveSettings()"><span class="track"></span></label></div>
+  <div class="setting"><div><b>Auto Reply</b><small>Reply to configured messages</small></div><label class="switch"><input type="checkbox" data-setting="autoReply" onchange="saveSettings()"><span class="track"></span></label></div>
+  <button style="margin-top:18px;background:#fff;color:#ff2e8a;border:2px solid #ffc2dd;box-shadow:none" onclick="loadSettings()">Refresh Settings</button>
 </section>
 
+<section class="card">
+  <h2>🌸 Connect Your WhatsApp Instantly</h2>
+  <div class="steps">
+    <div class="step"><b>📱</b><p><b>1. Enter Number</b><br>Type your WhatsApp number</p></div>
+    <div class="step"><b>🔑</b><p><b>2. Get Pair Code</b><br>Tap Get Code button</p></div>
+    <div class="step"><b>💖</b><p><b>3. Link in WhatsApp</b><br>Paste code & enjoy</p></div>
+  </div>
+</section>
 </main>
 
-<footer>© 2026 SHAJU BOT | Powered by SHAJU</footer>
+<footer>© 2026 SHAJU-BOT | Powered by SHAJU 💖</footer>
 <div class="toast" id="toast"></div>
 
 <script>
 const $ = id => document.getElementById(id);
-
-function notify(message){
-  const box=$("toast");
-  box.textContent=message;
-  box.style.display="block";
-  setTimeout(()=>box.style.display="none",3000);
-}
-
+function notify(m){const b=$("toast");b.textContent=m;b.style.display="block";setTimeout(()=>b.style.display="none",3000);}
 async function pairWhatsApp(){
   const btn=$("pairBtn");
   let number=$("number").value.replace(/\D/g,"");
-
-  if(/^01[3-9]\d{8}$/.test(number)){
-    number="88"+number;
-  }
-
-  if(!/^8801[3-9]\d{8}$/.test(number)){
-    notify("Please enter a valid Bangladesh number.");
-    return;
-  }
-
-  btn.disabled=true;
-  btn.textContent="Generating...";
-
+  if(/^01[3-9]\d{8}$/.test(number)){number="88"+number;}
+  if(!/^8801[3-9]\d{8}$/.test(number)){notify("Please enter a valid Bangladesh number.");return;}
+  btn.disabled=true;btn.textContent="Generating...";
   try{
-    const response=await fetch("/api/pair",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({number})
-    });
-
-    const data=await response.json();
-
-    if(!response.ok || !data.success){
-      throw new Error(data.message||"Pairing failed");
-    }
-
-    $("pairCode").style.display="block";
-    $("pairCode").textContent=data.pairingCode;
-    notify("Pairing code generated!");
-
-  }catch(error){
-    notify(error.message);
-  }finally{
-    btn.disabled=false;
-    btn.textContent="Generate Pairing Code";
-  }
+    const r=await fetch("/api/pair",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({number})});
+    const d=await r.json();
+    if(!r.ok||!d.success) throw new Error(d.message||"Pairing failed");
+    $("pairCode").style.display="block";$("pairCode").textContent=d.pairingCode;notify("Pairing code generated! 💖");
+  }catch(e){notify(e.message);}finally{btn.disabled=false;btn.textContent="💌 Get Code";}
 }
-
 async function checkStatus(){
   try{
-    const response=await fetch("/api/status");
-    const data=await response.json();
-
-    $("statusDot").className=
-      data.connected?"dot on":"dot";
-
-    $("statusText").textContent=
-      data.connected?"WhatsApp Connected":
-      "Status: "+data.status;
-
-  }catch{
-    $("statusText").textContent="Server unavailable";
-    $("statusDot").className="dot";
-  }
+    const r=await fetch("/api/status");const d=await r.json();
+    $("statusDot").className=d.connected?"dot on":"dot";
+    $("statusText").textContent=d.connected?"WhatsApp Connected 💖":"Status: "+d.status;
+  }catch{$("statusText").textContent="Server unavailable";$("statusDot").className="dot";}
 }
-
 async function loadSettings(){
   try{
-    const response=await fetch("/api/settings");
-    const data=await response.json();
-
-    if(!data.success) throw new Error("Could not load settings");
-
-    document.querySelectorAll("[data-setting]").forEach(input=>{
-      const key=input.dataset.setting;
-      input.checked=!!data.settings[key];
-    });
-
+    const r=await fetch("/api/settings");const d=await r.json();
+    if(!d.success) throw new Error("Could not load settings");
+    document.querySelectorAll("[data-setting]").forEach(i=>{i.checked=!!d.settings[i.dataset.setting];});
     notify("Settings loaded");
-  }catch(error){
-    notify(error.message);
-  }
+  }catch(e){notify(e.message);}
 }
-
 async function saveSettings(){
-  const settings={};
-
-  document.querySelectorAll("[data-setting]").forEach(input=>{
-    settings[input.dataset.setting]=input.checked;
-  });
-
+  const s={};document.querySelectorAll("[data-setting]").forEach(i=>{s[i.dataset.setting]=i.checked;});
   try{
-    const response=await fetch("/api/settings",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify(settings)
-    });
-
-    const data=await response.json();
-
-    if(!response.ok || !data.success){
-      throw new Error("Settings could not be saved");
-    }
-
-    notify("Settings saved!");
-  }catch(error){
-    notify(error.message);
-    loadSettings();
-  }
-}
-
-loadSettings();
-checkStatus();
-setInterval(checkStatus,5000);
-</script>
-
-</body>
-</html>
+    const r=await fetch("/api/settings",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(s)});
+    const d=await r.json();
