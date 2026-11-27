@@ -10,13 +10,16 @@
 body{font-family:'Baloo 2',Arial,sans-serif;background:linear-gradient(180deg,#ffe0ee,#ffc9dd,#ffb3d0);overflow-x:hidden;color:#7a2a4d;min-height:100vh}
 a{text-decoration:none;color:inherit}
 
-/* ===== SOUND BUTTON ===== */
-.sound-btn{position:fixed;top:10px;right:10px;z-index:100;width:38px;height:38px;background:#fff;border:0;border-radius:50%;font-size:18px;box-shadow:0 4px 12px #ff2e8a44;cursor:pointer;animation:pulse 2s infinite}
+/* ===== MUSIC BUTTON ===== */
+.music-btn{position:fixed;top:10px;right:10px;z-index:100;width:40px;height:40px;background:#fff;border:0;border-radius:50%;font-size:19px;box-shadow:0 4px 12px #ff2e8a44;cursor:pointer;animation:pulse 2s infinite}
+.music-btn.off{opacity:.6}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.music-note{position:fixed;top:58px;right:14px;z-index:99;background:#fff;color:#f91a7e;font-size:11px;font-weight:800;padding:4px 10px;border-radius:20px;box-shadow:0 3px 10px #ff2e8a33;animation:floatNote 2s infinite}
+@keyframes floatNote{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 
-/* ===== LIVE FLOATING HEARTS - CLICKABLE ===== */
+/* ===== LIVE HEARTS ===== */
 .hearts{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.hearts span{position:absolute;bottom:-30px;animation:floatUp 5s linear infinite;opacity:.8;pointer-events:auto;cursor:pointer}
+.hearts span{position:absolute;bottom:-30px;animation:floatUp 5s linear infinite;opacity:.8}
 .hearts span:nth-child(1){left:5%;font-size:16px;animation-delay:0s}
 .hearts span:nth-child(2){left:18%;font-size:20px;animation-delay:1s}
 .hearts span:nth-child(3){left:38%;font-size:14px;animation-delay:2s}
@@ -26,7 +29,7 @@ a{text-decoration:none;color:inherit}
 @keyframes floatUp{0%{transform:translateY(0) rotate(0deg);opacity:0}10%{opacity:.9}100%{transform:translateY(-110vh) rotate(40deg);opacity:0}}
 
 .topbar{position:relative;z-index:2;max-width:420px;margin:auto;padding:12px 14px 0;display:flex;align-items:center;gap:8px}
-.topbar .bow-icon{font-size:30px;animation:wiggle 2s ease-in-out infinite;cursor:pointer}
+.topbar .bow-icon{font-size:30px;animation:wiggle 2s ease-in-out infinite}
 @keyframes wiggle{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
 .topbar h1{font-size:21px;color:#f91a7e;line-height:1}
 .topbar p{font-size:10px;color:#a05a7d;margin-top:2px}
@@ -38,17 +41,17 @@ a{text-decoration:none;color:inherit}
 .nav a.active{background:#f91a7e;color:#fff;border-radius:50%;width:50px;height:50px;display:flex;align-items:center;justify-content:center;flex:none}
 .nav a.two{line-height:1.1}
 .hero{position:relative;z-index:2;max-width:420px;margin:auto;text-align:center;padding:12px 14px 0}
-.crown{font-size:26px;animation:bounce 2s infinite;cursor:pointer}
+.crown{font-size:26px;animation:bounce 2s infinite}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 .hero h2{font-size:34px;color:#f91a7e;text-shadow:2px 2px 0 #fff;line-height:1}
 .script{font-family:'Great Vibes',cursive;font-size:30px;color:#b3125e;margin-top:2px;line-height:1}
 .hero p{font-size:13px;color:#a05a7d;margin-top:6px;line-height:1.3}
 .pill{margin:11px 0;background:#ffc2d8;color:#d81a78;font-weight:800;font-size:11px;padding:7px;border-radius:20px;display:flex;justify-content:center;gap:11px}
-.hero-img{position:relative;width:160px;height:160px;margin:6px auto 0;animation:float 3s ease-in-out infinite;cursor:pointer}
+.hero-img{position:relative;width:160px;height:160px;margin:6px auto 0;animation:float 3s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 .hero-img img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:5px solid #fff;box-shadow:0 8px 20px #ff2e8a44}
 .bow2{position:absolute;left:-15px;top:2px;font-size:36px;transform:rotate(-25deg);z-index:2;animation:wiggle 2s infinite}
-.heart2{position:absolute;right:-7px;bottom:10px;font-size:34px;z-index:2;animation:heartBeat 1.5s infinite;cursor:pointer}
+.heart2{position:absolute;right:-7px;bottom:10px;font-size:34px;z-index:2;animation:heartBeat 1.5s infinite}
 @keyframes heartBeat{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
 .card{position:relative;z-index:2;max-width:420px;margin:0 auto;background:#fff;border-radius:20px 20px 0 0;padding:15px;margin-top:12px}
 .card:before,.card:after{content:"🎀";position:absolute;top:-8px;font-size:17px}
@@ -64,8 +67,7 @@ a{text-decoration:none;color:inherit}
 @keyframes glow{0%,100%{box-shadow:0 4px 0 #c40066}50%{box-shadow:0 4px 0 #c40066,0 0 16px #ff2e8a}}
 .btn:active{transform:translateY(2px) scale(.98)}
 .steps{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:11px}
-.step{background:#fff;text-align:center;padding:9px 6px;border-radius:12px;transition:.3s}
-.step:active{transform:scale(.95)}
+.step{background:#fff;text-align:center;padding:9px 6px;border-radius:12px}
 .step b{display:inline-flex;width:28px;height:28px;background:#f91a7e;color:#fff;border-radius:50%;align-items:center;justify-content:center;font-size:12px}
 .step p{margin-top:5px;color:#9a4a6d;font-size:11px}
 .pair-box{position:relative;z-index:2;max-width:420px;margin:0 auto;background:#fff;padding:0 15px 15px}
@@ -73,7 +75,7 @@ a{text-decoration:none;color:inherit}
 @keyframes pop{0%{transform:scale(.8)}100%{transform:scale(1)}}
 .about{position:relative;z-index:2;max-width:420px;margin:11px auto;background:#fff;border-radius:18px;padding:15px}
 .about h2{font-size:19px;color:#f91a7e}.about p{font-size:12px;line-height:1.5;color:#9a4a6d;margin:7px 0 11px}
-.cmd{background:#fff0f6;border-radius:11px;padding:9px;margin-bottom:7px;transition:.2s}.cmd:active{transform:scale(.97)}.cmd b{color:#d81a78;font-size:13px}.cmd p{margin:2px 0 0;font-size:11px}
+.cmd{background:#fff0f6;border-radius:11px;padding:9px;margin-bottom:7px}.cmd b{color:#d81a78;font-size:13px}.cmd p{margin:2px 0 0;font-size:11px}
 .footer{position:relative;z-index:2;text-align:center;padding:8px 14px 22px;max-width:420px;margin:auto}
 .footer h3{font-size:13px;color:#d81a78;margin:11px 0 5px}.footer a{display:block;font-size:12px;color:#7a2a4d;padding:3px}
 .footer .big{font-size:24px;color:#f91a7e;font-weight:800;margin-top:13px}.footer .script{font-size:22px}
@@ -81,43 +83,48 @@ a{text-decoration:none;color:inherit}
 .status{display:flex;align-items:center;gap:8px;font-weight:700;margin-top:10px;font-size:11px}.dot{width:9px;height:9px;border-radius:50%;background:#ffb02e}.dot.on{background:#2ecc71;box-shadow:0 0 8px #2ecc71}
 .sparkle{position:fixed;pointer-events:none;z-index:1;font-size:13px;animation:spark 3s infinite}
 @keyframes spark{0%,100%{opacity:.2;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
-/* burst hearts on click */
-.burst{position:fixed;pointer-events:none;z-index:200;font-size:18px;animation:burstUp 1s ease-out forwards}
-@keyframes burstUp{0%{transform:translate(0,0) scale(.5);opacity:1}100%{transform:translate(var(--x),-90px) scale(1.3);opacity:0}}
 </style>
 </head>
 <body>
-<button class="sound-btn" id="soundBtn" onclick="toggleSound()">🔊</button>
 
-<div class="hearts" id="hearts"><span onclick="heartPop(this)">💖</span><span onclick="heartPop(this)">🎀</span><span onclick="heartPop(this)">✨</span><span onclick="heartPop(this)">💗</span><span onclick="heartPop(this)">💖</span><span onclick="heartPop(this)">🎀</span></div>
+<!-- 🎵 MUSIC BUTTON + NOTE -->
+<button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</button>
+<div class="music-note" id="musicNote">🎵 Cute Music Playing...</div>
+
+<!-- Hidden autoplay music - cute tune, no file needed -->
+<audio id="cuteAudio" loop preload="auto">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_2c8c7b4b8a.mp3" type="audio/mpeg">
+</audio>
+
+<div class="hearts"><span>💖</span><span>🎀</span><span>✨</span><span>💗</span><span>💖</span><span>🎀</span></div>
 <span class="sparkle" style="top:15%;left:8%">✨</span><span class="sparkle" style="top:25%;right:10%;animation-delay:1s">💖</span><span class="sparkle" style="top:55%;left:5%;animation-delay:2s">🎀</span>
 
 <div class="topbar">
-  <div class="bow-icon" onclick="playPop()">🎀</div>
+  <div class="bow-icon">🎀</div>
   <div><h1>SHAJU-BOT</h1><p>WhatsApp Bot • Telegram Group Pair</p></div>
 </div>
 
 <div class="telegram-row">
-  <a class="tg" href="https://t.me/shajubhaijan10" target="_blank" onclick="playPop()">
+  <a class="tg" href="https://t.me/shajubhaijan10" target="_blank">
     <svg viewBox="0 0 24 24" fill="#229ED9"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
     Telegram
   </a>
 </div>
 
 <div class="nav">
-  <a href="#" class="active" onclick="playPop()">Home</a>
-  <a href="#pair" class="two" onclick="playPop()">Pair<br>Code</a>
-  <a href="#about" onclick="playPop()">About</a>
-  <a href="https://t.me/shajubhaijan10" target="_blank" onclick="playPop()">Contact</a>
+  <a href="#" class="active">Home</a>
+  <a href="#pair" class="two">Pair<br>Code</a>
+  <a href="#about">About</a>
+  <a href="https://t.me/shajubhaijan10" target="_blank">Contact</a>
 </div>
 
 <div class="hero">
-  <div class="crown" onclick="playTing()">👑</div>
+  <div class="crown">👑</div>
   <h2>SHAJU-BOT</h2>
   <div class="script">Pair Your Bot</div>
   <p>Get your WhatsApp pair code easily<br>from here</p>
   <div class="pill"><span>Your Bot</span><span>Your Control</span><span>Always Online</span></div>
-  <div class="hero-img" onclick="playHeart()"><span class="bow2">🎀</span><img src="shaju.jpg" alt="SHAJU"><span class="heart2" onclick="event.stopPropagation();playHeart()">💖</span></div>
+  <div class="hero-img"><span class="bow2">🎀</span><img src="shaju.jpg" alt="SHAJU"><span class="heart2">💖</span></div>
 </div>
 
 <div class="card" id="pair">
@@ -125,15 +132,15 @@ a{text-decoration:none;color:inherit}
   <p class="sub">Enter your WhatsApp number with<br>country code</p>
   <div class="input-wrap">
     <span class="wa"><svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg></span>
-    <input id="number" type="tel" placeholder="Enter your WhatsApp num" onfocus="playPop()">
+    <input id="number" type="tel" placeholder="Enter your WhatsApp num">
   </div>
   <p class="example">Example: +8801712345678</p>
   <button class="btn" id="pairBtn" onclick="pairWhatsApp()">✦ &nbsp; Get My Pair Code</button>
   <div class="steps">
-    <div class="step" onclick="playPop()"><b>1</b><p>Enter your number</p></div>
-    <div class="step" onclick="playPop()"><b>2</b><p>Tap Get My Pair Code</p></div>
-    <div class="step" onclick="playPop()"><b>3</b><p>Open Linked Devices</p></div>
-    <div class="step" onclick="playPop()"><b>4</b><p>Type the code</p></div>
+    <div class="step"><b>1</b><p>Enter your number</p></div>
+    <div class="step"><b>2</b><p>Tap Get My Pair Code</p></div>
+    <div class="step"><b>3</b><p>Open Linked Devices</p></div>
+    <div class="step"><b>4</b><p>Type the code</p></div>
   </div>
 </div>
 
@@ -147,48 +154,60 @@ a{text-decoration:none;color:inherit}
 <div class="about" id="about">
   <h2>About</h2>
   <p>SHAJU-BOT is a multi-session WhatsApp bot. Pair your number here, or send <b>/pair 8801XXXXXXXXX</b> in the official Telegram group, and the bot starts working on your WhatsApp.</p>
-  <div class="cmd" onclick="playPop()"><b>.menu</b><p>Show all commands</p></div>
-  <div class="cmd" onclick="playPop()"><b>.ping</b><p>Check bot speed</p></div>
-  <div class="cmd" onclick="playPop()"><b>.alive</b><p>Bot status</p></div>
-  <div class="cmd" onclick="playPop()"><b>.sticker</b><p>Image to sticker</p></div>
+  <div class="cmd"><b>.menu</b><p>Show all commands</p></div>
+  <div class="cmd"><b>.ping</b><p>Check bot speed</p></div>
+  <div class="cmd"><b>.alive</b><p>Bot status</p></div>
+  <div class="cmd"><b>.sticker</b><p>Image to sticker</p></div>
 </div>
 
 <div class="footer">
   <h3>Quick Links</h3>
-  <a href="#" onclick="playPop()">Home</a><a href="#pair" onclick="playPop()">Pair Code</a><a href="#about" onclick="playPop()">About</a><a href="https://t.me/shajubhaijan10" target="_blank" onclick="playPop()">Contact</a>
+  <a href="#">Home</a><a href="#pair">Pair Code</a><a href="#about">About</a><a href="https://t.me/shajubhaijan10" target="_blank">Contact</a>
   <div class="big">SHAJU-BOT</div>
   <div class="script">A Premium WhatsApp Bot</div>
   <p style="font-size:11px">Made with love by SHAJU</p>
   <h3>Follow Us</h3>
-  <a href="https://t.me/shajubhaijan10" target="_blank" onclick="playPop()">Owner on Telegram - @shajubhaijan10</a>
-  <a href="https://t.me/shajubhaijan10" target="_blank" onclick="playPop()"><b>Telegram pair bot - @shajubhaijan10</b></a>
+  <a href="https://t.me/shajubhaijan10" target="_blank">Owner on Telegram - @shajubhaijan10</a>
+  <a href="https://t.me/shajubhaijan10" target="_blank"><b>Telegram pair bot - @shajubhaijan10</b></a>
   <p style="font-size:10px;color:#9a4a6d;margin-top:8px">Stay connected for updates and support</p>
   <p style="font-size:10px;color:#9a4a6d;margin-top:11px">© 2026 SHAJU-BOT • All Rights Reserved</p>
 </div>
 
 <div class="toast" id="toast"></div>
 <script>
-let soundOn=true, audioCtx=null;
-function getCtx(){if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended') audioCtx.resume();return audioCtx;}
-function beep(freq,dur,type='sine',vol=.15,delay=0){if(!soundOn) return;try{const c=getCtx(),o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(0,c.currentTime+delay);g.gain.linearRampToValueAtTime(vol,c.currentTime+delay+.01);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+delay+dur);o.connect(g);g.connect(c.destination);o.start(c.currentTime+delay);o.stop(c.currentTime+delay+dur+.05);}catch(e){}}
-function playPop(){beep(600,.12,'sine',.18);beep(900,.1,'sine',.12,.05);}
-function playTing(){beep(1200,.2,'sine',.18);beep(1800,.25,'sine',.12,.08);}
-function playHeart(){beep(500,.15,'sine',.2);beep(500,.15,'sine',.2,.18);beep(900,.2,'triangle',.15,.35);burstHearts();}
-function playSuccess(){beep(523,.15,'sine',.18);beep(659,.15,'sine',.18,.12);beep(784,.3,'sine',.18,.24);}
-function toggleSound(){soundOn=!soundOn;document.getElementById('soundBtn').textContent=soundOn?'🔊':'🔇';if(soundOn) playPop();}
-function heartPop(el){playPop();burstHearts();}
-function burstHearts(){const emojis=['💖','💗','✨','🎀','💕'];for(let i=0;i<5;i++){const s=document.createElement('div');s.className='burst';s.textContent=emojis[i];s.style.left=(window.innerWidth/2-10+Math.random()*40)+'px';s.style.top=(window.innerHeight/2)+'px';s.style.setProperty('--x',(Math.random()*120-60)+'px');document.body.appendChild(s);setTimeout(()=>s.remove(),1000);}}
-// প্রথম টাচে সাউন্ড চালু করার জন্য
-document.addEventListener('touchstart',()=>{getCtx();},{once:true});
+// ===== CUTE MUSIC AUTOPLAY =====
+let musicOn=true;
+const audio=document.getElementById('cuteAudio');
+audio.volume=0.35; // হালকা কিউট ভলিউম
+
+function startMusic(){
+  if(!musicOn) return;
+  audio.play().catch(()=>{});
+  document.getElementById('musicNote').textContent='🎵 Cute Music Playing...';
+}
+// পেজ খুললেই চেষ্টা করবো
+window.addEventListener('load',()=>{ startMusic(); setTimeout(startMusic,1000); });
+// প্রথম টাচ / ক্লিকেই মিউজিক চালু (ব্রাউজার নিয়ম)
+document.addEventListener('touchstart',startMusic,{once:true});
+document.addEventListener('click',startMusic,{once:true});
+document.addEventListener('scroll',startMusic,{once:true});
+
+function toggleMusic(){
+  musicOn=!musicOn;
+  const btn=document.getElementById('musicBtn');
+  const note=document.getElementById('musicNote');
+  if(musicOn){ audio.play(); btn.textContent='🎵'; btn.classList.remove('off'); note.style.display='block'; note.textContent='🎵 Cute Music Playing...'; }
+  else{ audio.pause(); btn.textContent='🔇'; btn.classList.add('off'); note.textContent='🔇 Music Paused'; }
+}
 
 const $=id=>document.getElementById(id);
 function notify(m){const b=$("toast");b.textContent=m;b.style.display="block";setTimeout(()=>b.style.display="none",3000);}
 async function pairWhatsApp(){
   const btn=$("pairBtn");let n=$("number").value.replace(/\D/g,"");
   if(/^01[3-9]\d{8}$/.test(n)){n="88"+n;}
-  if(!/^8801[3-9]\d{8}$/.test(n)){notify("Please enter a valid Bangladesh number 💖");beep(200,.2,'sawtooth',.1);return;}
-  playPop();btn.disabled=true;btn.textContent="Generating... 💖";
-  try{const r=await fetch("/api/pair",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({number:n})});const d=await r.json();if(!r.ok||!d.success) throw new Error(d.message||"Pairing failed");$("pairCode").style.display="block";$("pairCode").textContent=d.pairingCode;notify("Pairing code generated! 💖");playSuccess();}
+  if(!/^8801[3-9]\d{8}$/.test(n)){notify("Please enter a valid Bangladesh number 💖");return;}
+  btn.disabled=true;btn.textContent="Generating... 💖";
+  try{const r=await fetch("/api/pair",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({number:n})});const d=await r.json();if(!r.ok||!d.success) throw new Error(d.message||"Pairing failed");$("pairCode").style.display="block";$("pairCode").textContent=d.pairingCode;notify("Pairing code generated! 💖");}
   catch(e){notify(e.message);}finally{btn.disabled=false;btn.textContent="✦   Get My Pair Code";}
 }
 async function checkStatus(){try{const r=await fetch("/api/status");const d=await r.json();$("statusDot").className=d.connected?"dot on":"dot";$("statusText").textContent=d.connected?"WhatsApp Connected 💖":"Status: "+d.status;}catch{$("statusText").textContent="Server unavailable";}}
