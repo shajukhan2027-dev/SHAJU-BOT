@@ -1,4 +1,3 @@
-
 require("dotenv").config();
 
 const express = require("express");
@@ -6,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const crypto = require("crypto");
 const rateLimit = require("express-rate-limit");
 const path = require("path");
+const fs = require("fs"); // ✅ FIX 1: public খুঁজার জন্য
 
 const {
   requestPairingCode,
@@ -155,18 +155,27 @@ app.post("/api/settings", (req, res) => {
   });
 });
 
-const publicPath = path.join(__dirname, "..", "public");
+// ✅ FIX 2: public ফোল্ডার ২ জায়গাতেই খুঁজবো - রুটে হোক বা src এর পাশে হোক
+let publicPath = path.join(__dirname, "public");
+if (!fs.existsSync(publicPath)) {
+  publicPath = path.join(__dirname, "..", "public");
+}
 
 app.use(express.static(publicPath));
 
+// ✅ FIX 3: /api রিকোয়েস্টকে index.html বানাই ফেলবো না
 app.get("*", (req, res) => {
+  if (req.path.startsWith("/api/")) {
+    return res.status(404).json({ success: false, message: "Not found" });
+  }
   res.sendFile(path.join(publicPath, "index.html"));
 });
 
 const PORT = process.env.PORT || 3000;
 
-const server = app.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`🔥 SHAJU BOT running on port ${PORT}`);
+  console.log(`📁 Public folder: ${publicPath}`);
 
   initializeSessions().catch(error => {
     console.error("Session initialization failed:", error.message);
