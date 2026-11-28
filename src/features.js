@@ -1,18 +1,18 @@
-
 const WARNINGS = new Map();
 const SPAM_TRACKER = new Map();
 
 const DEFAULT_SETTINGS = {
   welcome: true,
-  antiLink: false,
-  antiSpam: false,
-  badWordFilter: false,
+  antiLink: true,
+  antiSpam: true,
+  badWordFilter: true,
   autoReply: true,
-  groupProtection: false,
-  badWords: ["খারাপশব্দ"],
+  groupProtection: true,
+  badWords: ["boka", "kharap"],
   autoReplies: {
-    hi: "Hello! 👋 Welcome to SHAJU BOT.",
-    hello: "হ্যালো! ❤️ কেমন আছেন?"
+    hi: "Hello! 👋 Welcome to SHAJU BOT 💖",
+    hello: "হ্যালো! ❤️ কেমন আছেন?",
+    "assalamualaikum": "Walaikum Assalam! 💖 কেমন আছেন?"
   }
 };
 
@@ -26,31 +26,27 @@ function getSettings(ownerId) {
       autoReplies: { ...DEFAULT_SETTINGS.autoReplies }
     });
   }
-
   return botSettings.get(ownerId);
 }
 
 function checkLink(text) {
-  return /(https?:\/\/|www\.|chat\.whatsapp\.com\/)/i.test(text);
+  return /(https?:\/\/|www\.|chat\.whatsapp\.com\/|t\.me\/|telegram\.me\/)/i.test(text);
 }
 
 function checkSpam(text, chatId, sender) {
   const key = `${chatId}:${sender}`;
   const now = Date.now();
-
   const history = SPAM_TRACKER.get(key) || [];
   const recent = history.filter(time => now - time < 5000);
-
   recent.push(now);
   SPAM_TRACKER.set(key, recent);
-
+  // 5 সেকেন্ডে 5টা মেসেজ বা 1500+ অক্ষর = স্প্যাম
   return recent.length >= 5 || text.length > 1500;
 }
 
 function checkBadWords(text, settings) {
-  return settings.badWords.some(word =>
-    word && text.toLowerCase().includes(word.toLowerCase())
-  );
+  const low = text.toLowerCase();
+  return settings.badWords.some(word => word && low.includes(word.toLowerCase()));
 }
 
 function addWarning(key) {
@@ -62,15 +58,16 @@ function addWarning(key) {
 async function isGroupAdmin(sock, chatId, sender) {
   try {
     const metadata = await sock.groupMetadata(chatId);
-    const participant = metadata.participants.find(
-      item => item.id === sender
-    );
+    const participant = metadata.participants.find(item => item.id === sender);
+    return participant?.admin === "admin" || participant?.admin === "superadmin";
+  } catch { return false; }
+}
 
-    return participant?.admin === "admin" ||
-           participant?.admin === "superadmin";
-  } catch {
-    return false;
-  }
+// মেসেজ ডিলিট করার ফাংশন
+async function deleteMsg(sock, chatId, message) {
+  try {
+    await sock.sendMessage(chatId, { delete: message.key });
+  } catch {}
 }
 
 async function handleMessage(ownerId, message, sock) {
@@ -87,47 +84,50 @@ async function handleMessage(ownerId, message, sock) {
       "";
 
     if (!text) return;
-
     const isGroup = chatId.endsWith("@g.us");
+    const lower = text.toLowerCase().trim();
 
     if (isGroup) {
       const admin = await isGroupAdmin(sock, chatId, sender);
 
-      if (settings.antiLink && checkLink(text) && !admin) {
-        await sock.sendMessage(chatId, {
-          text: "⚠️ লিংক পাঠানো নিষিদ্ধ!"
-        });
-        return;
-      }
+      // বট নিজে অ্যাডমিন না হইলে ডিলিট/কিক পারবো না
+      if (!admin) {
 
-      if (settings.antiSpam &&
-          checkSpam(text, chatId, sender) &&
-          !admin) {
-        await sock.sendMessage(chatId, {
-          text: "⚠️ স্প্যাম মেসেজ পাঠাবেন না!"
-        });
-        return;
-      }
-
-      if (settings.badWordFilter &&
-          checkBadWords(text, settings) &&
-          !admin) {
-        const count = addWarning(`${chatId}:${sender}`);
-
-        await sock.sendMessage(chatId, {
-          text: `⚠️ খারাপ শব্দ ব্যবহার করবেন না! Warning: ${count}/3`
-        });
-
-        if (count >= 3) {
-          WARNINGS.delete(`${chatId}:${sender}`);
+        // 1. ANTI-LINK - ডিলিট + ওয়ার্নিং
+        if (settings.antiLink && checkLink(text)) {
+          await deleteMsg(sock, chatId, message);
+          await sock.sendMessage(chatId, { text: "⚠️ লিংক পাঠানো নিষিদ্ধ! লিংক ডিলিট করা হইছে 💖" });
+          return;
         }
-        return;
+
+        // 2. ANTI-SPAM - ডিলিট
+        if (settings.antiSpam && checkSpam(text, chatId, sender)) {
+          await deleteMsg(sock, chatId, message);
+          await sock.sendMessage(chatId, { text: "⚠️ স্প্যাম মেসেজ পাঠাবেন না! ⛔" });
+          return;
+        }
+
+        // 3. BAD WORD - 3 বার হইলে কিক
+        if (settings.badWordFilter && checkBadWords(text, settings)) {
+          const count = addWarning(`${chatId}:${sender}`);
+          await deleteMsg(sock, chatId, message);
+
+          if (count >= 3) {
+            WARNINGS.delete(`${chatId}:${sender}`);
+            await sock.sendMessage(chatId, { text: `⛔ @${sender.split("@")[0]} 3 বার খারাপ শব্দ ব্যবহার করায় গ্রুপ থেকে রিমুভ করা হইলো!`, mentions: [sender] });
+            // বট অ্যাডমিন হইলে কিক করবো
+            try { await sock.groupParticipantsUpdate(chatId, [sender], "remove"); } catch {}
+          } else {
+            await sock.sendMessage(chatId, { text: `⚠️ খারাপ শব্দ ব্যবহার করবেন না! Warning: ${count}/3` });
+          }
+          return;
+        }
       }
     }
 
+    // 4. AUTO REPLY - এখন ছোট হাত/বড় হাত + স্পেস সমস্যা নাই
     if (settings.autoReply) {
-      const reply = settings.autoReplies[text.toLowerCase()];
-
+      const reply = settings.autoReplies[lower];
       if (reply) {
         await sock.sendMessage(chatId, { text: reply });
       }
@@ -138,7 +138,4 @@ async function handleMessage(ownerId, message, sock) {
   }
 }
 
-module.exports = {
-  getSettings,
-  handleMessage
-};
+module.exports = { getSettings, handleMessage };
