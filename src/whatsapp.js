@@ -1,4 +1,3 @@
-
 const makeWASocket =
   require("@whiskeysockets/baileys").default;
 
@@ -23,13 +22,11 @@ function getAuthDirectory(ownerId) {
   if (!/^[a-f0-9-]{36}$/i.test(ownerId)) {
     throw new Error("Invalid session owner.");
   }
-
   return path.join(sessionRoot, ownerId);
 }
 
 async function connectSession(ownerId, phoneNumber) {
   const authDir = getAuthDirectory(ownerId);
-
   fs.mkdirSync(authDir, { recursive: true });
 
   const { state, saveCreds } =
@@ -45,7 +42,8 @@ async function connectSession(ownerId, phoneNumber) {
   const session = {
     sock,
     status: "connecting",
-    phoneNumber
+    phoneNumber,
+    reconnecting: false // ✅ FIX 2: বারবার reconnect আটকাইবো
   };
 
   sessions.set(ownerId, session);
@@ -54,7 +52,6 @@ async function connectSession(ownerId, phoneNumber) {
 
   sock.ev.on("messages.upsert", async ({ messages, type }) => {
     if (type !== "notify") return;
-
     for (const message of messages) {
       await handleMessage(ownerId, message, sock);
     }
@@ -62,12 +59,12 @@ async function connectSession(ownerId, phoneNumber) {
 
   sock.ev.on("connection.update", async (update) => {
     const current = sessions.get(ownerId);
-
     if (!current || current.sock !== sock) return;
 
     if (update.connection === "open") {
       current.status = "connected";
-      console.log("SHAJU BOT connected:", ownerId);
+      current.reconnecting = false;
+      console.log("✅ SHAJU BOT connected:", ownerId);
     }
 
     if (update.connection === "close") {
@@ -76,30 +73,31 @@ async function connectSession(ownerId, phoneNumber) {
       const code =
         update.lastDisconnect?.error?.output?.statusCode;
 
+      // লগআউট হইলে সেশন ডিলিট - আবার নতুন করে Pair করা যাইবো
       if (code === DisconnectReason.loggedOut) {
         sessions.delete(ownerId);
-
         try {
-          await fs.promises.rm(authDir, {
-            recursive: true,
-            force: true
-          });
+          await fs.promises.rm(authDir, { recursive: true, force: true });
         } catch (error) {
           console.error("Session cleanup error:", error.message);
         }
-
         return;
       }
 
-      console.log("Reconnecting SHAJU BOT:", ownerId);
+      // ✅ FIX 2: একবারই reconnect করবো, বারবার না
+      if (current.reconnecting) return;
+      current.reconnecting = true;
+
+      console.log("🔄 Reconnecting SHAJU BOT:", ownerId);
 
       setTimeout(async () => {
         if (sessions.get(ownerId) !== current) return;
-
         try {
           await connectSession(ownerId, phoneNumber);
         } catch (error) {
           console.error("Reconnect error:", error.message);
+          // reconnect ফেইল করলে সেশন ছাইড়া দিবো, যাতে আবার Pair করা যায়
+          if (sessions.get(ownerId) === current) sessions.delete(ownerId);
         }
       }, 5000);
     }
@@ -110,31 +108,36 @@ async function connectSession(ownerId, phoneNumber) {
 
 async function requestPairingCode(ownerId, phoneNumber) {
   if (pending.has(ownerId)) {
-    throw new Error("Pairing request already in progress.");
+    throw new Error("Pairing request already in progress. Wait 10 sec and try again.");
   }
 
-  if (sessions.has(ownerId)) {
-    throw new Error("A session already exists. Check connection status.");
+  // ✅ FIX 1: disconnected সেশন থাকলে ডিলিট করে নতুন Pair নিতে দিবো
+  const old = sessions.get(ownerId);
+  if (old) {
+    if (old.status === "connected") {
+      throw new Error("Already connected! Check connection status.");
+    }
+    // পুরানো disconnected সেশন বন্ধ করে দাও
+    try { old.sock.end(undefined); } catch {}
+    sessions.delete(ownerId);
   }
 
   pending.set(ownerId, true);
 
   try {
     const sock = await connectSession(ownerId, phoneNumber);
-    const pairingCode = await sock.requestPairingCode(phoneNumber);
 
+    // ✅ FIX 3: সকেট রেডি হওয়ার জন্য একটু অপেক্ষা, নাইলে Pair Code ফেইল করে
+    await new Promise(r => setTimeout(r, 1500));
+
+    const pairingCode = await sock.requestPairingCode(phoneNumber);
     return pairingCode;
   } catch (error) {
     const session = sessions.get(ownerId);
-
     if (session) {
       sessions.delete(ownerId);
-
-      try {
-        session.sock.end(undefined);
-      } catch {}
+      try { session.sock.end(undefined); } catch {}
     }
-
     throw error;
   } finally {
     pending.delete(ownerId);
