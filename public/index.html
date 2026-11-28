@@ -9,10 +9,11 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:'Baloo 2',Arial,sans-serif;background:linear-gradient(180deg,#ffe0ee,#ffc9dd,#ffb3d0);overflow-x:hidden;color:#7a2a4d;min-height:100vh}
 a{text-decoration:none;color:inherit}
-.music-btn{position:fixed;top:10px;right:10px;z-index:100;width:40px;height:40px;background:#fff;border:0;border-radius:50%;font-size:19px;box-shadow:0 4px 12px #ff2e8a44;cursor:pointer;animation:pulse 2s infinite}
+/* ===== MUSIC - FIXED AT BOTTOM, NO OVERLAP ===== */
+.music-btn{position:fixed;bottom:18px;right:14px;z-index:100;width:46px;height:46px;background:#fff;border:0;border-radius:50%;font-size:20px;box-shadow:0 4px 14px #ff2e8a55;cursor:pointer;animation:pulse 2s infinite}
 .music-btn.off{opacity:.6}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
-.music-note{position:fixed;top:58px;right:14px;z-index:99;background:#fff;color:#f91a7e;font-size:11px;font-weight:800;padding:4px 10px;border-radius:20px;box-shadow:0 3px 10px #ff2e8a33;animation:floatNote 2s infinite}
+.music-note{position:fixed;bottom:70px;right:14px;z-index:99;background:#fff;color:#f91a7e;font-size:11px;font-weight:800;padding:5px 10px;border-radius:20px;box-shadow:0 3px 10px #ff2e8a33;animation:floatNote 2s infinite;white-space:nowrap;max-width:calc(100vw - 28px)}
 @keyframes floatNote{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 .hearts{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .hearts span{position:absolute;bottom:-30px;animation:floatUp 5s linear infinite;opacity:.8}
@@ -28,7 +29,7 @@ a{text-decoration:none;color:inherit}
 @keyframes wiggle{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
 .topbar h1{font-size:21px;color:#f91a7e;line-height:1;letter-spacing:.5px}
 .topbar p{font-size:10px;color:#a05a7d;margin-top:2px}
-.telegram-row{position:relative;z-index:2;max-width:420px;margin:auto;padding:10px 14px 0;display:flex;justify-content:flex-end}
+.telegram-row{position:relative;z-index:2;max-width:420px;margin:auto;padding:12px 14px 0;display:flex;justify-content:flex-end}
 .tg{background:#fff;color:#f91a7e;font-weight:800;font-size:13px;padding:7px 14px;border-radius:30px;box-shadow:0 4px 12px #ff2e8a33;display:flex;align-items:center;gap:6px}
 .tg svg{width:17px;height:17px}
 .nav{position:relative;z-index:2;max-width:420px;margin:10px auto 0;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-radius:30px;padding:4px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 6px 15px #ff2e8a22;margin-left:14px;margin-right:14px}
@@ -76,10 +77,10 @@ a{text-decoration:none;color:inherit}
 .about{position:relative;z-index:2;max-width:420px;margin:11px auto;background:#fff;border-radius:18px;padding:15px}
 .about h2{font-size:19px;color:#f91a7e}.about p{font-size:12px;line-height:1.5;color:#9a4a6d;margin:7px 0 11px}
 .cmd{background:#fff0f6;border-radius:11px;padding:9px;margin-bottom:7px}.cmd b{color:#d81a78;font-size:13px}.cmd p{margin:2px 0 0;font-size:11px}
-.footer{position:relative;z-index:2;text-align:center;padding:8px 14px 22px;max-width:420px;margin:auto}
+.footer{position:relative;z-index:2;text-align:center;padding:8px 14px 30px;max-width:420px;margin:auto}
 .footer h3{font-size:13px;color:#d81a78;margin:11px 0 5px}.footer a{display:block;font-size:12px;color:#7a2a4d;padding:3px}
 .footer .big{font-size:24px;color:#f91a7e;font-weight:800;margin-top:13px}.footer .script{font-size:22px}
-.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#4a1a32;color:#fff;padding:9px 15px;border-radius:12px;display:none;z-index:99;max-width:90%;text-align:center;font-weight:700;font-size:12px}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#4a1a32;color:#fff;padding:9px 15px;border-radius:12px;display:none;z-index:99;max-width:90%;text-align:center;font-weight:700;font-size:12px}
 .status{display:flex;align-items:center;gap:8px;font-weight:700;margin-top:10px;font-size:11px}.dot{width:9px;height:9px;border-radius:50%;background:#ffb02e}.dot.on{background:#2ecc71;box-shadow:0 0 8px #2ecc71}
 .sparkle{position:fixed;pointer-events:none;z-index:1;font-size:13px;animation:spark 3s infinite}
 @keyframes spark{0%,100%{opacity:.2;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
@@ -175,7 +176,6 @@ a{text-decoration:none;color:inherit}
 
 <div class="toast" id="toast"></div>
 <script>
-// ===== CUTE MUSIC - NO MP3 LINK, 100% WORKING =====
 let musicOn = true;
 let audioCtx = null;
 let musicTimer = null;
@@ -212,10 +212,9 @@ function toggleMusic(){
   if(musicOn){ btn.textContent='🎵'; btn.classList.remove('off'); note.style.display='block'; note.textContent='🎵 Cute Music Playing...'; startMusic(); }
   else{ btn.textContent='🔇'; btn.classList.add('off'); note.textContent='🔇 Music Paused'; clearInterval(musicTimer); musicTimer=null; }
 }
-document.addEventListener('touchstart', startMusic, {once:false});
-document.addEventListener('click', startMusic, {once:false});
-document.addEventListener('scroll', startMusic, {once:false});
-
+document.addEventListener('touchstart', startMusic);
+document.addEventListener('click', startMusic);
+document.addEventListener('scroll', startMusic);
 const $=id=>document.getElementById(id);
 function notify(m){const b=$("toast");b.textContent=m;b.style.display="block";setTimeout(()=>b.style.display="none",3000);}
 async function pairWhatsApp(){
