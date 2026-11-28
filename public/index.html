@@ -31,34 +31,41 @@ a{text-decoration:none;color:inherit}
 .topbar{position:relative;z-index:2;max-width:420px;margin:auto;padding:12px 14px 0;display:flex;align-items:center;gap:8px}
 .topbar .bow-icon{font-size:30px;animation:wiggle 2s ease-in-out infinite}
 @keyframes wiggle{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
-.topbar h1{font-size:21px;color:#f91a7e;line-height:1}
+.topbar h1{font-size:21px;color:#f91a7e;line-height:1;letter-spacing:.5px}
 .topbar p{font-size:10px;color:#a05a7d;margin-top:2px}
 .telegram-row{position:relative;z-index:2;max-width:420px;margin:auto;padding:10px 14px 0;display:flex;justify-content:flex-end}
 .tg{background:#fff;color:#f91a7e;font-weight:800;font-size:13px;padding:7px 14px;border-radius:30px;box-shadow:0 4px 12px #ff2e8a33;display:flex;align-items:center;gap:6px}
 .tg svg{width:17px;height:17px}
-.nav{position:relative;z-index:2;max-width:420px;margin:10px auto 0;background:#fff;border-radius:30px;padding:4px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 6px 15px #ff2e8a22;margin-left:14px;margin-right:14px}
+.nav{position:relative;z-index:2;max-width:420px;margin:10px auto 0;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-radius:30px;padding:4px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 6px 15px #ff2e8a22;margin-left:14px;margin-right:14px}
 .nav a{font-size:13px;font-weight:700;color:#7a2a4d;padding:8px 6px;text-align:center;flex:1}
-.nav a.active{background:#f91a7e;color:#fff;border-radius:50%;width:50px;height:50px;display:flex;align-items:center;justify-content:center;flex:none}
+.nav a.active{background:#f91a7e;color:#fff;border-radius:50%;width:50px;height:50px;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 4px 12px #ff2e8a66}
 .nav a.two{line-height:1.1}
 .hero{position:relative;z-index:2;max-width:420px;margin:auto;text-align:center;padding:12px 14px 0}
-.crown{font-size:26px;animation:bounce 2s infinite}
+.crown{font-size:26px;animation:bounce 2s infinite;filter:drop-shadow(0 3px 5px #ffb02e88)}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-.hero h2{font-size:34px;color:#f91a7e;text-shadow:2px 2px 0 #fff;line-height:1}
+.hero h2{font-size:34px;color:#f91a7e;text-shadow:2px 2px 0 #fff,0 4px 15px #ff2e8a44;line-height:1}
 .script{font-family:'Great Vibes',cursive;font-size:30px;color:#b3125e;margin-top:2px;line-height:1}
 .hero p{font-size:13px;color:#a05a7d;margin-top:6px;line-height:1.3}
 .pill{margin:11px 0;background:#ffc2d8;color:#d81a78;font-weight:800;font-size:11px;padding:7px;border-radius:20px;display:flex;justify-content:center;gap:11px}
-.hero-img{position:relative;width:160px;height:160px;margin:6px auto 0;animation:float 3s ease-in-out infinite}
+
+/* ===== ANAYA STYLE PREMIUM PROFILE ===== */
+.hero-img{position:relative;width:168px;height:168px;margin:8px auto 0;animation:float 3s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-.hero-img img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:5px solid #fff;box-shadow:0 8px 20px #ff2e8a44}
-.bow2{position:absolute;left:-15px;top:2px;font-size:36px;transform:rotate(-25deg);z-index:2;animation:wiggle 2s infinite}
-.heart2{position:absolute;right:-7px;bottom:10px;font-size:34px;z-index:2;animation:heartBeat 1.5s infinite}
+.hero-img:before{content:"";position:absolute;inset:-6px;border-radius:50%;background:conic-gradient(#ff2e8a,#ffb3d0,#fff,#ffc2dd,#ff2e8a);animation:spin 4s linear infinite;z-index:-1}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-img img{width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:50%;border:5px solid #fff;box-shadow:0 12px 28px #ff2e8a55,0 0 0 2px #ffd6e7;image-rendering:auto}
+.hero-img .glow-ring{position:absolute;inset:-10px;border-radius:50%;border:2px solid #ffffff88;pointer-events:none}
+.badge{position:absolute;left:50%;transform:translateX(-50%);bottom:-9px;background:#fff;color:#f91a7e;font-size:10px;font-weight:800;padding:4px 11px;border-radius:20px;box-shadow:0 4px 12px #ff2e8a44;white-space:nowrap;z-index:3}
+.bow2{position:absolute;left:-15px;top:2px;font-size:36px;transform:rotate(-25deg);z-index:2;animation:wiggle 2s infinite;filter:drop-shadow(0 3px 4px #ff2e8a44)}
+.heart2{position:absolute;right:-7px;bottom:10px;font-size:34px;z-index:2;animation:heartBeat 1.5s infinite;filter:drop-shadow(0 3px 5px #ff2e8a55)}
 @keyframes heartBeat{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
-.card{position:relative;z-index:2;max-width:420px;margin:0 auto;background:#fff;border-radius:20px 20px 0 0;padding:15px;margin-top:12px}
+.card{position:relative;z-index:2;max-width:420px;margin:0 auto;background:#fff;border-radius:20px 20px 0 0;padding:15px;margin-top:14px;box-shadow:0 -4px 20px #ff2e8a11}
 .card:before,.card:after{content:"🎀";position:absolute;top:-8px;font-size:17px}
 .card:before{left:6px}.card:after{right:6px}
 .card h3{font-size:19px;color:#f91a7e;text-align:center}
 .card .sub{font-size:12px;color:#9a4a6d;text-align:center;margin:5px 0 10px;line-height:1.4}
 .input-wrap{display:flex;align-items:center;gap:8px;border:2px solid #ffc2dd;border-radius:14px;padding:4px 10px}
+.input-wrap:focus-within{border-color:#ff2e8a;box-shadow:0 0 0 3px #ff2e8a22}
 .input-wrap .wa{width:32px;height:32px;background:#e6ffe9;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .input-wrap .wa svg{width:19px;height:19px}
 .input-wrap input{border:0;outline:none;width:100%;font-family:inherit;font-size:13px;font-weight:700}
@@ -87,11 +94,9 @@ a{text-decoration:none;color:inherit}
 </head>
 <body>
 
-<!-- 🎵 MUSIC BUTTON + NOTE -->
 <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</button>
 <div class="music-note" id="musicNote">🎵 Cute Music Playing...</div>
 
-<!-- Hidden autoplay music - cute tune, no file needed -->
 <audio id="cuteAudio" loop preload="auto">
   <source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_2c8c7b4b8a.mp3" type="audio/mpeg">
 </audio>
@@ -124,7 +129,14 @@ a{text-decoration:none;color:inherit}
   <div class="script">Pair Your Bot</div>
   <p>Get your WhatsApp pair code easily<br>from here</p>
   <div class="pill"><span>Your Bot</span><span>Your Control</span><span>Always Online</span></div>
-  <div class="hero-img"><span class="bow2">🎀</span><img src="shaju.jpg" alt="SHAJU"><span class="heart2">💖</span></div>
+  <!-- ANAYA STYLE PREMIUM PROFILE -->
+  <div class="hero-img">
+    <span class="bow2">🎀</span>
+    <div class="glow-ring"></div>
+    <img src="/shaju.jpg" alt="SHAJU" onerror="this.src='shaju.jpg'">
+    <span class="heart2">💖</span>
+    <div class="badge">✨ Verified • SHAJU ✨</div>
+  </div>
 </div>
 
 <div class="card" id="pair">
@@ -175,23 +187,18 @@ a{text-decoration:none;color:inherit}
 
 <div class="toast" id="toast"></div>
 <script>
-// ===== CUTE MUSIC AUTOPLAY =====
 let musicOn=true;
 const audio=document.getElementById('cuteAudio');
-audio.volume=0.35; // হালকা কিউট ভলিউম
-
+audio.volume=0.35;
 function startMusic(){
   if(!musicOn) return;
   audio.play().catch(()=>{});
   document.getElementById('musicNote').textContent='🎵 Cute Music Playing...';
 }
-// পেজ খুললেই চেষ্টা করবো
 window.addEventListener('load',()=>{ startMusic(); setTimeout(startMusic,1000); });
-// প্রথম টাচ / ক্লিকেই মিউজিক চালু (ব্রাউজার নিয়ম)
 document.addEventListener('touchstart',startMusic,{once:true});
 document.addEventListener('click',startMusic,{once:true});
 document.addEventListener('scroll',startMusic,{once:true});
-
 function toggleMusic(){
   musicOn=!musicOn;
   const btn=document.getElementById('musicBtn');
@@ -199,7 +206,6 @@ function toggleMusic(){
   if(musicOn){ audio.play(); btn.textContent='🎵'; btn.classList.remove('off'); note.style.display='block'; note.textContent='🎵 Cute Music Playing...'; }
   else{ audio.pause(); btn.textContent='🔇'; btn.classList.add('off'); note.textContent='🔇 Music Paused'; }
 }
-
 const $=id=>document.getElementById(id);
 function notify(m){const b=$("toast");b.textContent=m;b.style.display="block";setTimeout(()=>b.style.display="none",3000);}
 async function pairWhatsApp(){
